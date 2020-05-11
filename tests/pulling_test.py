@@ -1,4 +1,6 @@
 
+# Checks if github workflow is working
 
-def test_one():
+
+def test_github():
     pass
