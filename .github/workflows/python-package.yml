@@ -3,7 +3,12 @@
 
 name: Python package
 
-on: [push]
+push:
+    branches:
+      - master
+    paths:
+      - 'test/*'
+      - 'src/*'
 
 jobs:
   build:
