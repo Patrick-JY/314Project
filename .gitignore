@@ -151,4 +151,5 @@ crashlytics-build.properties
 fabric.properties
 
 #ignore datasource
-.json
+/json/
+/json/Amazon_Instant_Video_5.json
