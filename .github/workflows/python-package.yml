@@ -7,7 +7,7 @@ on:
       branches:
         - master
       paths:
-        - 'test/*'
+        - 'tests/*'
         - 'src/*'
 
 jobs:
