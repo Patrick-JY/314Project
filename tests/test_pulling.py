@@ -4,3 +4,9 @@
 
 def test_github():
     pass
+
+# Checks the amazon data pulling from the amazon datasets
+
+
+def test_amazon_pulling():
+    pass
