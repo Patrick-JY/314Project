@@ -9,5 +9,5 @@ def test_github():
 
 
 def test_amazon_pulling():
-    pulling_logic.pulling_amazon("reviews_Amazon_Instant_Video_5.json.gz")
+    pulling_logic.pulling_amazon("Amazon_githubdata.json.gz")
     pass
