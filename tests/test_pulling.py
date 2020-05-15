@@ -25,7 +25,7 @@ def test_amazon_pulling():
     assert df.columns[2] == "ReviewScore", "ReviewScore Column incorrectly labeled"
 
     # Checks if the IDs are Unique (test may take a long time on large data)
-    if not df['ID'].value_counts().is_unique:
+    if not df['ID'].is_unique:
         errors.append("ID column values are not unique")
 
     # Check if ReviewScore is all numeric
