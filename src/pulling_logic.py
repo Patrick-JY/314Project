@@ -27,6 +27,7 @@ def pulling_amazon(dataset):
 def prepare_amazon(dataframe):
     df = pd.concat([dataframe['reviewerID'] + dataframe['unixReviewTime'].astype('str'), dataframe['reviewText']
                        , dataframe['overall']], axis=1, keys=['ID', 'ReviewText', 'ReviewScore'])
+    return df
 
 
 
