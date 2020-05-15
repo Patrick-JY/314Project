@@ -20,11 +20,13 @@ def amazon_get_df(path):
 
 
 def pulling_amazon(dataset):
-    pulled_df = amazon_get_df("../json/"+dataset)
-
-    df = pd.concat([pulled_df['reviewerID'] + pulled_df['unixReviewTime'].astype('str'), pulled_df['reviewText']
-                       , pulled_df['overall']], axis=1,keys=['ID', 'ReviewText', 'ReviewScore'])
-
+    df = amazon_get_df("../json/"+dataset)
     return df
+
+
+def prepare_amazon(dataframe):
+    df = pd.concat([dataframe['reviewerID'] + dataframe['unixReviewTime'].astype('str'), dataframe['reviewText']
+                       , dataframe['overall']], axis=1, keys=['ID', 'ReviewText', 'ReviewScore'])
+
 
 
