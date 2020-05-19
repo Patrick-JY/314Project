@@ -20,7 +20,7 @@ def amazon_get_df(path):
 
 
 def pulling_amazon(dataset):
-    df = amazon_get_df("../json/"+dataset)
+    df = prepare_amazon(amazon_get_df("../json/"+dataset))
     return df
 
 
