@@ -1,6 +1,6 @@
-from src.sentiment_analyser_interface import performAnalysis
+from src.sentiment_analyser_interface import performSentimentAnalysis
 def test_sentiment_analyser_interface():
-    data = performAnalysis("This is bad")
+    data = performSentimentAnalysis("This is bad")
     assert "text" in data
     assert "predicted_sentiment" in data
     assert "pos" in data
