@@ -1,0 +1,2 @@
+def performAnalysis(text):
+    pass
