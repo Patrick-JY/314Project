@@ -11,4 +11,4 @@ def df():
 
 def test_capitalize_all_words(df):
     capitalize_all_words(df)
-    assert df["reviewTextUpper"].filter(lambda x: not x.isUpper()) == 0
+    assert df[~df.reviewTextUpper.str.isupper()].empty

@@ -1,2 +1,2 @@
 def capitalize_all_words(df):
-    pass
+    df['reviewTextUpper'] = df['reviewText'].str.upper()
