@@ -27,6 +27,7 @@ class Test:
         assert parsed.output == True
         with pytest.raises(SystemExit):
             self.parser.parse_args(['-i'])
+
     def test_inputstring(self):
         with pytest.raises(SystemExit):
             self.parser.parse_args(['-i', 'Hi'])
