@@ -35,6 +35,12 @@ def test_amazon_pulling():
     assert not errors, "errors occured:\n{}".format("\n".join(errors))
 
 
+def test_synonym_replacement():
+    df = pulling_logic.prepare_amazon()
+    replaced_df = pulling_logic.synonym_replacement(df)
+    errors = []
+
+    
 
 
 
