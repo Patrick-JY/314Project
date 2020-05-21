@@ -8,7 +8,7 @@ def test_github():
 
 # Checks the amazon data pulling from the amazon data sets
 def test_amazon_pulling():
-    df = pulling_logic.prepare_amazon("Amazon_githubdata.json.gz")
+    df = pulling_logic.pulling_amazon("Amazon_githubdata.json.gz")
     errors = []
 
     # First checks if the data is being put into a form properly
