@@ -9,7 +9,7 @@ on:
       paths:
         - 'tests/*'
         - 'src/*'
-        - '.github/*'
+        - '.github/workflows/*'
 
 jobs:
   build:
