@@ -10,7 +10,7 @@ def test_github():
 def test_amazon_pulling():
     df = pulling_logic.pulling_amazon("Amazon_githubdata.json.gz")
     errors = []
-
+    github_line_amount = 37
     # First checks if the data is being put into a form properly
     if not len(df.columns) == 3:
         errors.append("incorrect column amount")
@@ -32,7 +32,11 @@ def test_amazon_pulling():
     if not df['ReviewScore'].dtype == "float64":
         errors.append("Rating column not numeric")
 
-    assert not errors, "errors occured:\n{}".format("\n".join(errors))
+    # Checks if all lines from github data imported (github data contains 37 lines)
+    if not len(df.index) == github_line_amount:
+        errors.append("Not All data is imported correctly")
+
+    assert not errors, "errors occurred:\n{}".format("\n".join(errors))
 
 
 
