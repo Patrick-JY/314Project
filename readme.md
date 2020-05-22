@@ -6,3 +6,6 @@ Datasource placed in folder named json (lowercase) in main directory
 
 To update the requirements.txt file use this cmd in the cmd window
 pip freeze > requirements.txt
+
+run tests with 
+python -m pytest
