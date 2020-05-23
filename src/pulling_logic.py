@@ -1,6 +1,7 @@
 # logic for the pulling of data
 import pandas as pd
 import gzip
+from src.utils import join_base_path
 # code for data prep is modified from the sample given in http://jmcauley.ucsd.edu/data/amazon/
 
 
@@ -20,7 +21,7 @@ def amazon_get_df(path):
 
 
 def pulling_amazon(dataset):
-    df = prepare_amazon(amazon_get_df("json/"+dataset))
+    df = prepare_amazon(amazon_get_df(join_base_path("json/"+dataset)))
     return df
 
 
