@@ -15,7 +15,7 @@ def test_capitalise_all_words(df):
 
 def test_uncapitalise_all_words(df):
     uncapitalise_all_words(df)
-    uncapitalised_words = df[~df.ReviewTextUpper.str.islower()]
+    uncapitalised_words = df[~df.ReviewTextLower.str.islower()]
     assert uncapitalised_words.empty, "Word uncapitalisation failed, {0} word(s) were capitalised ".format(len(uncapitalised_words))
 
 # MR1 -> capitalise vs uncapitalise
@@ -23,5 +23,5 @@ def test_prepare_data_mr1(df):
     prepare_data_mr1(df)
     capitalised_words = df[~df.ReviewTextUpper.str.isupper()]
     assert capitalised_words.empty, "Word capitalisation failed, {0} word(s) were not capitalised ".format(len(capitalised_words))
-    uncapitalised_words = df[~df.ReviewTextUpper.str.islower()]
+    uncapitalised_words = df[~df.ReviewTextLower.str.islower()]
     assert uncapitalised_words.empty, "Word uncapitalisation failed, {0} word(s) were capitalised ".format(len(uncapitalised_words))
