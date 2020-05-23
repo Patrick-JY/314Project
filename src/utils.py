@@ -1,2 +1,5 @@
+from pathlib import Path
+
+
 def join_base_path(path):
-    pass
+    return Path(__file__).parent.parent.joinpath(path)
