@@ -10,6 +10,8 @@ pip freeze > requirements.txt
 run tests with 
 python -m pytest
 
-for file paths to get a path relative to the base package directory
-from src.utils import join_base_path
-join_base_path(path)
+for file paths to get a path relative to the base package directory use
+
+    from src.utils import join_base_path
+
+    relative_path = oin_base_path(path)
