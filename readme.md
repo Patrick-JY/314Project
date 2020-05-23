@@ -14,4 +14,4 @@ for file paths to get a path relative to the base package directory use
 
     from src.utils import join_base_path
 
-    relative_path = oin_base_path(path)
+    relative_path = join_base_path(path)
