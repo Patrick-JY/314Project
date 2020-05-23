@@ -3,3 +3,4 @@ import os
 
 def test_join_base_path():
     assert os.path.exists(join_base_path(".314ProjectBaseDir")) == True
+    assert os.path.exists(join_base_path(".314ProjectBaseDirs")) == False
