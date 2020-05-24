@@ -9,3 +9,6 @@ def prepare_data_mr1(df):
     capitalise_all_words(df)
     uncapitalise_all_words(df)
     return df
+
+def run_mr1(df):
+    return df
