@@ -47,3 +47,5 @@ def run_sentiment_mr2(df):
     df['Mr2'] = df["ReviewTextPositiveRemoved"].apply(lambda row: performSentimentAnalysis(row))
     # Remove columns that are not needed anymore
     del df["ReviewTextPositiveRemoved"]
+
+def remove_negative_words(text, negative_words):

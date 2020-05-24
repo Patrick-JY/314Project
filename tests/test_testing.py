@@ -1,9 +1,9 @@
 import pytest
 import json
 import pandas as pd
-from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2
+from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2, remove_negative_words
 from src.pulling_logic import pulling_amazon
-from src.utils import get_positive_words
+from src.utils import get_positive_words, get_negative_words
 
 @pytest.fixture(scope="session")
 def df():
@@ -88,3 +88,9 @@ def test_run_sentiment_mr2(df):
         assert "neg" in row, "neg key missing from row"
         assert "neu" in row, "neu key missing from row"
         assert "compound" in row, "compound key missing from row dictionary"
+
+def test_remove_negative_words():
+    text = "You are bad and good. I love you. You are terrific and I like the cut of your jib."
+    negative_words = get_negative_words()
+    text_positive_removed = remove_negative_words(text, negative_words)
+    assert text_positive_removed == "You are and good. I love you. You are terrific and I t like the cut of your jib."
