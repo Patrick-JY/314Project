@@ -22,4 +22,9 @@ def get_positive_words():
     return positive_words
 
 def get_negative_words():
-    pass
+    lexicon_data = load_vadersentiment_lexicon_data()
+    negative_words = []
+    for key, value in lexicon_data.items():
+        if value < 0:
+            negative_words.append(key)
+    return negative_words
