@@ -93,4 +93,4 @@ def test_remove_negative_words():
     text = "You are bad and good. I love you. You are terrific and I like the cut of your jib."
     negative_words = get_negative_words()
     text_positive_removed = remove_negative_words(text, negative_words)
-    assert text_positive_removed == "You are and good. I love you. You are terrific and I t like the cut of your jib."
+    assert text_positive_removed == "You are and good. I love you. You are terrific and I like the of your jib."

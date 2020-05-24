@@ -49,3 +49,15 @@ def run_sentiment_mr2(df):
     del df["ReviewTextPositiveRemoved"]
 
 def remove_negative_words(text, negative_words):
+    sentences = sent_tokenize(text)
+    result = ""
+    for sentence in sentences:
+        words = sentence.split(" ")
+
+        result_words = [word for word in words if word.replace(".", "").replace(",", "").lower() not in negative_words]
+        if result != "":
+            result += " "
+        result += ' '.join(result_words)
+        if sentence.endswith(".") and not result.endswith("."):
+            result += "."
+    return result
