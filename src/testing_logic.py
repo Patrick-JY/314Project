@@ -39,3 +39,6 @@ def remove_positive_words(text, positive_words):
 def prepare_data_mr2(df):
     positive_words = get_positive_words()
     df["ReviewTextPositiveRemoved"] = df["ReviewText"].apply(lambda row: remove_positive_words(row, positive_words))
+
+def run_sentiment_mr2(df):
+    return df
