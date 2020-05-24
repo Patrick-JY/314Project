@@ -1,5 +1,8 @@
 from src.sentiment_analyser_interface import performSentimentAnalysis
 from nltk import sent_tokenize
+import nltk
+nltk.download('punkt')
+
 from src.utils import get_positive_words
 
 def capitalise_all_words(df):
