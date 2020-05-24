@@ -3,7 +3,7 @@ from nltk import sent_tokenize
 import nltk
 nltk.download('punkt')
 
-from src.utils import get_positive_words
+from src.utils import get_positive_words, get_negative_words
 
 def capitalise_all_words(df):
     df['ReviewTextUpper'] = df['ReviewText'].str.upper()
@@ -63,4 +63,5 @@ def remove_negative_words(text, negative_words):
     return result
 
 def prepare_data_mr3(df):
-    pass
+    negative_words = get_negative_words()
+    df["ReviewTextNegativeRemoved"] = df["ReviewText"].apply(lambda row: remove_negative_words(row, negative_words))
