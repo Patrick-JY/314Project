@@ -12,3 +12,7 @@ def load_vadersentiment_lexicon_data():
             lexicon_data[line.split("\t")[0]] = float(line.split("\t")[1])
 
     return lexicon_data
+
+def get_positive_words():
+    pass
+

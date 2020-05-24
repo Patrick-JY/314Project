@@ -1,4 +1,4 @@
-from src.utils import join_base_path, load_vadersentiment_lexicon_data
+from src.utils import join_base_path, load_vadersentiment_lexicon_data, get_positive_words
 import os
 
 def test_join_base_path():
@@ -12,3 +12,9 @@ def test_load_vadersentiment_lexicon_data():
     for key, value in lexicon_data.items():
         assert type(key) == str, "key should be a string"
         assert type(value) == float, "value should be a float"
+
+def test_get_positive_words():
+    lexicon_data = load_vadersentiment_lexicon_data()
+    positive_words = get_positive_words()
+    for word in positive_words:
+        assert lexicon_data[word] > 0, "Negative or neutral word found in positive word"
