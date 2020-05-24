@@ -1,4 +1,6 @@
 from src.sentiment_analyser_interface import performSentimentAnalysis
+from nltk import sent_tokenize
+from src.utils import get_positive_words
 
 def capitalise_all_words(df):
     df['ReviewTextUpper'] = df['ReviewText'].str.upper()
@@ -15,7 +17,33 @@ def prepare_data_mr1(df):
 def run_sentiment_mr1(df):
     prepare_data_mr1(df)
     df['Mr1'] = df.apply(lambda row: {"capitalised": performSentimentAnalysis(row["ReviewTextUpper"]), "uncapitalised": performSentimentAnalysis(row["ReviewTextLower"])}, axis=1)
+
     # Remove columns that are not needed anymore
     del df["ReviewTextUpper"]
     del df["ReviewTextLower"]
+    return df
+
+def remove_positive_words(text, positive_words):
+    sentences = sent_tokenize(text)
+    result = ""
+    for sentence in sentences:
+        words = sentence.split(" ")
+
+        result_words = [word for word in words if word.replace(".", "").replace(",", "").lower() not in positive_words]
+        if result != "":
+            result += " "
+        result += ' '.join(result_words)
+        if sentence.endswith(".") and not result.endswith("."):
+            result += "."
+    return result
+
+def prepare_data_mr2(df):
+    positive_words = get_positive_words()
+    df["ReviewTextPositiveRemoved"] = df["ReviewText"].apply(lambda row: remove_positive_words(row, positive_words))
+
+def run_sentiment_mr2(df):
+    prepare_data_mr2(df)
+    df['Mr2'] = df["ReviewTextPositiveRemoved"].apply(lambda row: performSentimentAnalysis(row))
+    # Remove columns that are not needed anymore
+    del df["ReviewTextPositiveRemoved"]
     return df

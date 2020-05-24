@@ -1,8 +1,9 @@
 import pytest
 import json
 import pandas as pd
-from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1
+from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2
 from src.pulling_logic import pulling_amazon
+from src.utils import get_positive_words
 
 @pytest.fixture(scope="session")
 def df():
@@ -58,3 +59,32 @@ def test_run_sentiment_mr1(df):
         assert "neg" in row["uncapitalised"], "neg key missing from row[\"uncapitalised\"]"
         assert "neu" in row["uncapitalised"], "neu key missing from row[\"uncapitalised\"]"
         assert "compound" in row["uncapitalised"], "compound key missing from row[\"uncapitalised\"] dictionary"
+
+def test_remove_positive_words():
+    text = "You are bad and good. I love you. You are terrific and I like the cut of your jib."
+    positive_words = get_positive_words()
+    text_positive_removed = remove_positive_words(text, positive_words)
+    assert text_positive_removed == "You are bad and. I you. You are and I the cut of your jib."
+
+
+def test_prepare_data_mr2(df):
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = df.copy()
+
+    prepare_data_mr2(df)
+    assert not df["ReviewText"].equals(df["ReviewTextPositiveRemoved"])
+
+
+def test_run_sentiment_mr2(df):
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = df.copy()
+
+    run_sentiment_mr2(df)
+    for row in df["Mr2"]:
+        assert type(row) == dict
+        assert "text" in row, "text key missing from row"
+        assert "predicted_sentiment" in row, "predicted_sentiment key missing from row"
+        assert "pos" in row, "pos key missing from row"
+        assert "neg" in row, "neg key missing from row"
+        assert "neu" in row, "neu key missing from row"
+        assert "compound" in row, "compound key missing from row dictionary"
