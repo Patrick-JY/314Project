@@ -3,7 +3,7 @@ from nltk import sent_tokenize
 import nltk
 nltk.download('punkt')
 
-from src.utils import get_positive_words
+from src.utils import get_positive_words, get_negative_words
 
 def capitalise_all_words(df):
     df['ReviewTextUpper'] = df['ReviewText'].str.upper()
@@ -15,7 +15,6 @@ def prepare_data_mr1(df):
     """MR1 -> capitalise vs uncapitalise all words"""
     capitalise_all_words(df)
     uncapitalise_all_words(df)
-    return df
 
 def run_sentiment_mr1(df):
     prepare_data_mr1(df)
@@ -24,7 +23,6 @@ def run_sentiment_mr1(df):
     # Remove columns that are not needed anymore
     del df["ReviewTextUpper"]
     del df["ReviewTextLower"]
-    return df
 
 def remove_positive_words(text, positive_words):
     sentences = sent_tokenize(text)
@@ -49,4 +47,27 @@ def run_sentiment_mr2(df):
     df['Mr2'] = df["ReviewTextPositiveRemoved"].apply(lambda row: performSentimentAnalysis(row))
     # Remove columns that are not needed anymore
     del df["ReviewTextPositiveRemoved"]
-    return df
+
+def remove_negative_words(text, negative_words):
+    sentences = sent_tokenize(text)
+    result = ""
+    for sentence in sentences:
+        words = sentence.split(" ")
+
+        result_words = [word for word in words if word.replace(".", "").replace(",", "").lower() not in negative_words]
+        if result != "":
+            result += " "
+        result += ' '.join(result_words)
+        if sentence.endswith(".") and not result.endswith("."):
+            result += "."
+    return result
+
+def prepare_data_mr3(df):
+    negative_words = get_negative_words()
+    df["ReviewTextNegativeRemoved"] = df["ReviewText"].apply(lambda row: remove_negative_words(row, negative_words))
+
+def run_sentiment_mr3(df):
+    prepare_data_mr3(df)
+    df['Mr3'] = df["ReviewTextNegativeRemoved"].apply(lambda row: performSentimentAnalysis(row))
+    # Remove columns that are not needed anymore
+    del df["ReviewTextNegativeRemoved"]
