@@ -61,8 +61,8 @@ def test_run_sentiment_mr1(df):
         assert "compound" in row["uncapitalised"], "compound key missing from row[\"uncapitalised\"] dictionary"
 
 def test_remove_positive_words():
-    text = "You are bad and good. I love you."
+    text = "You are bad and good. I love you. You are terrific and I like the cut of your jib."
     positive_words = get_positive_words()
     text_positive_removed = remove_positive_words(text, positive_words)
-    assert text_positive_removed == "You are bad and. I you."
+    assert text_positive_removed == "You are bad and. I you. You are and I the cut of your jib."
 
