@@ -27,7 +27,7 @@ def test_prepare_data_mr1(df):
     assert uncapitalised_words.empty, "Word uncapitalisation failed, {0} word(s) were capitalised ".format(len(uncapitalised_words))
 
 def test_run_mr1(df):
-    assert df.mr1
+    run_mr1(df)
     assert type(df.mr1[0]) == dict
     assert "capitalised" in df.mr1[0]
     assert "text" in df.mr1[0]["capitalised"], "text key missing from df.mr1[0][\"capitalised\"]"

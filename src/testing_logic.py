@@ -1,3 +1,5 @@
+from src.sentiment_analyser_interface import performSentimentAnalysis
+
 def capitalise_all_words(df):
     df['ReviewTextUpper'] = df['ReviewText'].str.upper()
 
@@ -11,4 +13,6 @@ def prepare_data_mr1(df):
     return df
 
 def run_mr1(df):
+    prepare_data_mr1(df)
+    df['mr1'] = df.apply(lambda row: {"capitalised": performSentimentAnalysis(row["ReviewTextUpper"]), "uncapitalised": performSentimentAnalysis(row["ReviewTextLower"])}, axis=1)
     return df
