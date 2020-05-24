@@ -34,3 +34,6 @@ def remove_positive_words(text, positive_words):
         if sentence.endswith(".") and not result.endswith("."):
             result += "."
     return result
+
+def prepare_data_mr2(df):
+    pass

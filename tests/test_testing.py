@@ -1,7 +1,7 @@
 import pytest
 import json
 import pandas as pd
-from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, remove_positive_words
+from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, remove_positive_words, prepare_data_mr2
 from src.pulling_logic import pulling_amazon
 from src.utils import get_positive_words
 
@@ -66,3 +66,10 @@ def test_remove_positive_words():
     text_positive_removed = remove_positive_words(text, positive_words)
     assert text_positive_removed == "You are bad and. I you. You are and I the cut of your jib."
 
+
+def test_prepare_data_mr2(df):
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = df.copy()
+
+    prepare_data_mr2(df)
+    assert df["ReviewText"] != df["ReviewTextPositiveRemoved"]
