@@ -67,4 +67,7 @@ def prepare_data_mr3(df):
     df["ReviewTextNegativeRemoved"] = df["ReviewText"].apply(lambda row: remove_negative_words(row, negative_words))
 
 def run_sentiment_mr3(df):
-    pass
+    prepare_data_mr3(df)
+    df['Mr3'] = df["ReviewTextNegativeRemoved"].apply(lambda row: performSentimentAnalysis(row))
+    # Remove columns that are not needed anymore
+    del df["ReviewTextNegativeRemoved"]
