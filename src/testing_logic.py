@@ -15,7 +15,6 @@ def prepare_data_mr1(df):
     """MR1 -> capitalise vs uncapitalise all words"""
     capitalise_all_words(df)
     uncapitalise_all_words(df)
-    return df
 
 def run_sentiment_mr1(df):
     prepare_data_mr1(df)
@@ -24,7 +23,6 @@ def run_sentiment_mr1(df):
     # Remove columns that are not needed anymore
     del df["ReviewTextUpper"]
     del df["ReviewTextLower"]
-    return df
 
 def remove_positive_words(text, positive_words):
     sentences = sent_tokenize(text)
@@ -49,4 +47,3 @@ def run_sentiment_mr2(df):
     df['Mr2'] = df["ReviewTextPositiveRemoved"].apply(lambda row: performSentimentAnalysis(row))
     # Remove columns that are not needed anymore
     del df["ReviewTextPositiveRemoved"]
-    return df
