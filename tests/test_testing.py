@@ -4,22 +4,31 @@ import pandas as pd
 from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1
 from src.pulling_logic import pulling_amazon
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def df():
     return pulling_amazon("Amazon_githubdata.json.gz")
 
 def test_capitalise_all_words(df):
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = df.copy()
+    
     capitalise_all_words(df)
     capitalised_words = df[~df.ReviewTextUpper.str.isupper()]
     assert capitalised_words.empty, "Word capitalisation failed, {0} word(s) were not capitalised ".format(len(capitalised_words))
 
 def test_uncapitalise_all_words(df):
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = df.copy()
+
     uncapitalise_all_words(df)
     uncapitalised_words = df[~df.ReviewTextLower.str.islower()]
     assert uncapitalised_words.empty, "Word uncapitalisation failed, {0} word(s) were capitalised ".format(len(uncapitalised_words))
 
 def test_prepare_data_mr1(df):
     """Mr1 -> capitalise vs uncapitalise all words"""
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = df.copy()
+
     prepare_data_mr1(df)
     capitalised_words = df[~df.ReviewTextUpper.str.isupper()]
     assert capitalised_words.empty, "Word capitalisation failed, {0} word(s) were not capitalised ".format(len(capitalised_words))
@@ -27,6 +36,9 @@ def test_prepare_data_mr1(df):
     assert uncapitalised_words.empty, "Word uncapitalisation failed, {0} word(s) were capitalised ".format(len(uncapitalised_words))
 
 def test_run_sentiment_mr1(df):
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = df.copy()
+
     run_sentiment_mr1(df)
 
     for row in df["Mr1"]:
