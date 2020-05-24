@@ -17,6 +17,7 @@ def prepare_data_mr1(df):
 def run_sentiment_mr1(df):
     prepare_data_mr1(df)
     df['Mr1'] = df.apply(lambda row: {"capitalised": performSentimentAnalysis(row["ReviewTextUpper"]), "uncapitalised": performSentimentAnalysis(row["ReviewTextLower"])}, axis=1)
+
     # Remove columns that are not needed anymore
     del df["ReviewTextUpper"]
     del df["ReviewTextLower"]
@@ -41,4 +42,8 @@ def prepare_data_mr2(df):
     df["ReviewTextPositiveRemoved"] = df["ReviewText"].apply(lambda row: remove_positive_words(row, positive_words))
 
 def run_sentiment_mr2(df):
+    prepare_data_mr2(df)
+    df['Mr2'] = df["ReviewTextPositiveRemoved"].apply(lambda row: performSentimentAnalysis(row))
+    # Remove columns that are not needed anymore
+    del df["ReviewTextPositiveRemoved"]
     return df

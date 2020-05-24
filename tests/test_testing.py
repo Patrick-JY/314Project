@@ -80,7 +80,6 @@ def test_run_sentiment_mr2(df):
     df = df.copy()
 
     run_sentiment_mr2(df)
-
     for row in df["Mr2"]:
         assert type(row) == dict
         assert "text" in row, "text key missing from row"
