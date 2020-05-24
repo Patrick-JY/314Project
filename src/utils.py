@@ -21,3 +21,5 @@ def get_positive_words():
             positive_words.append(key)
     return positive_words
 
+def get_negative_words():
+    pass
