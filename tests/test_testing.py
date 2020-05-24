@@ -1,7 +1,7 @@
 import pytest
 import json
 import pandas as pd
-from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2, remove_negative_words, prepare_data_mr3
+from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2, remove_negative_words, prepare_data_mr3, run_sentiment_mr3
 from src.pulling_logic import pulling_amazon
 from src.utils import get_positive_words, get_negative_words
 
@@ -101,3 +101,17 @@ def test_prepare_data_mr3(df):
 
     prepare_data_mr3(df)
     assert not df["ReviewText"].equals(df["ReviewTextNegativeRemoved"])
+
+def test_run_sentiment_mr3(df):
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = df.copy()
+
+    run_sentiment_mr3(df)
+    for row in df["Mr3"]:
+        assert type(row) == dict
+        assert "text" in row, "text key missing from row"
+        assert "predicted_sentiment" in row, "predicted_sentiment key missing from row"
+        assert "pos" in row, "pos key missing from row"
+        assert "neg" in row, "neg key missing from row"
+        assert "neu" in row, "neu key missing from row"
+        assert "compound" in row, "compound key missing from row dictionary"
