@@ -19,3 +19,6 @@ def run_sentiment_mr1(df):
     del df["ReviewTextUpper"]
     del df["ReviewTextLower"]
     return df
+
+def remove_positive_words(text, positive_words):
+    pass

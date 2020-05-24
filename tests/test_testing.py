@@ -1,8 +1,9 @@
 import pytest
 import json
 import pandas as pd
-from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1
+from src.testing_logic import capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, remove_positive_words
 from src.pulling_logic import pulling_amazon
+from src.utils import get_positive_words
 
 @pytest.fixture(scope="session")
 def df():
@@ -58,3 +59,10 @@ def test_run_sentiment_mr1(df):
         assert "neg" in row["uncapitalised"], "neg key missing from row[\"uncapitalised\"]"
         assert "neu" in row["uncapitalised"], "neu key missing from row[\"uncapitalised\"]"
         assert "compound" in row["uncapitalised"], "compound key missing from row[\"uncapitalised\"] dictionary"
+
+    def test_remove_positive_words():
+        text = "You are bad and good. I love you."
+        positive_words = get_positive_words()
+        text_positive_removed = remove_positive_words(text, positive_words)
+        assert text_positive_removed == "You are bad and. I you."
+
