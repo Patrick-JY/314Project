@@ -1,4 +1,5 @@
 from src.sentiment_analyser_interface import performSentimentAnalysis
+from nltk import sent_tokenize
 
 def capitalise_all_words(df):
     df['ReviewTextUpper'] = df['ReviewText'].str.upper()
@@ -21,7 +22,6 @@ def run_sentiment_mr1(df):
     return df
 
 def remove_positive_words(text, positive_words):
-    from nltk import sent_tokenize
     sentences = sent_tokenize(text)
     result = ""
     for sentence in sentences:
