@@ -16,5 +16,6 @@ def test_load_vadersentiment_lexicon_data():
 def test_get_positive_words():
     lexicon_data = load_vadersentiment_lexicon_data()
     positive_words = get_positive_words()
+    assert positive_words is not None, "Positive words list cannot be empty"
     for word in positive_words:
         assert lexicon_data[word] > 0, "Negative or neutral word found in positive word"

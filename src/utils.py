@@ -14,5 +14,10 @@ def load_vadersentiment_lexicon_data():
     return lexicon_data
 
 def get_positive_words():
-    pass
+    lexicon_data = load_vadersentiment_lexicon_data()
+    positive_words = []
+    for key, value in lexicon_data.items():
+        if value > 0:
+            positive_words.append(key)
+    return positive_words
 
