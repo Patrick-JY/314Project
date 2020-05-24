@@ -72,4 +72,4 @@ def test_prepare_data_mr2(df):
     df = df.copy()
 
     prepare_data_mr2(df)
-    assert df["ReviewText"] != df["ReviewTextPositiveRemoved"]
+    assert not df["ReviewText"].equals(df["ReviewTextPositiveRemoved"])

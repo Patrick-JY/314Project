@@ -1,5 +1,6 @@
 from src.sentiment_analyser_interface import performSentimentAnalysis
 from nltk import sent_tokenize
+from src.utils import get_positive_words
 
 def capitalise_all_words(df):
     df['ReviewTextUpper'] = df['ReviewText'].str.upper()
@@ -27,7 +28,7 @@ def remove_positive_words(text, positive_words):
     for sentence in sentences:
         words = sentence.split(" ")
 
-        result_words = [word for word in words if word.replace(".", "").lower() not in positive_words]
+        result_words = [word for word in words if word.replace(".", "").replace(",", "").lower() not in positive_words]
         if result != "":
             result += " "
         result += ' '.join(result_words)
@@ -36,4 +37,5 @@ def remove_positive_words(text, positive_words):
     return result
 
 def prepare_data_mr2(df):
-    pass
+    positive_words = get_positive_words()
+    df["ReviewTextPositiveRemoved"] = df["ReviewText"].apply(lambda row: remove_positive_words(row, positive_words))
