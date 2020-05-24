@@ -12,7 +12,7 @@ def prepare_data_mr1(df):
     uncapitalise_all_words(df)
     return df
 
-def run_mr1(df):
+def run_sentiment_mr1(df):
     prepare_data_mr1(df)
     df['Mr1'] = df.apply(lambda row: {"capitalised": performSentimentAnalysis(row["ReviewTextUpper"]), "uncapitalised": performSentimentAnalysis(row["ReviewTextLower"])}, axis=1)
     return df
