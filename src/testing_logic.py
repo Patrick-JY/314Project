@@ -21,4 +21,16 @@ def run_sentiment_mr1(df):
     return df
 
 def remove_positive_words(text, positive_words):
-    pass
+    from nltk import sent_tokenize
+    sentences = sent_tokenize(text)
+    result = ""
+    for sentence in sentences:
+        words = sentence.split(" ")
+
+        result_words = [word for word in words if word.replace(".", "").lower() not in positive_words]
+        if result != "":
+            result += " "
+        result += ' '.join(result_words)
+        if sentence.endswith(".") and not result.endswith("."):
+            result += "."
+    return result

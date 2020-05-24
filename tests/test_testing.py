@@ -60,9 +60,9 @@ def test_run_sentiment_mr1(df):
         assert "neu" in row["uncapitalised"], "neu key missing from row[\"uncapitalised\"]"
         assert "compound" in row["uncapitalised"], "compound key missing from row[\"uncapitalised\"] dictionary"
 
-    def test_remove_positive_words():
-        text = "You are bad and good. I love you."
-        positive_words = get_positive_words()
-        text_positive_removed = remove_positive_words(text, positive_words)
-        assert text_positive_removed == "You are bad and. I you."
+def test_remove_positive_words():
+    text = "You are bad and good. I love you."
+    positive_words = get_positive_words()
+    text_positive_removed = remove_positive_words(text, positive_words)
+    assert text_positive_removed == "You are bad and. I you."
 
