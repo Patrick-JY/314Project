@@ -52,7 +52,8 @@ def test_synonym_replacement(amazon_data_frame):
     replaced_df = pulling_logic.replace_with_synonyms(amazon_data_frame)
     assert 'SynonymReplaced' in replaced_df.columns
     try:
-        pandas.testing.assert_series_equal(replaced_df['SynonymReplaced'], replaced_df['ReviewText'])
+        pandas.testing.assert_series_equal(replaced_df['SynonymReplaced'], replaced_df['ReviewText'], True, "equiv",
+                                           True, False, False)
     except AssertionError:
         pass
     else:
