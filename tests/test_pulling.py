@@ -1,4 +1,6 @@
 import src.pulling_logic as pulling_logic
+import pytest
+import pandas
 
 
 # Checks if github workflow is working by just doing a simple auto succeed test
@@ -37,6 +39,28 @@ def test_amazon_pulling():
         errors.append("Not All data is imported correctly")
 
     assert not errors, "errors occurred:\n{}".format("\n".join(errors))
+
+
+@pytest.fixture
+def amazon_data_frame():
+    return pulling_logic.pulling_amazon("Amazon_githubdata.json.gz")
+
+
+# Tests the synonym_replacement function
+def test_synonym_replacement(amazon_data_frame):
+    old_df = amazon_data_frame
+    replaced_df = pulling_logic.replace_with_synonyms(amazon_data_frame.copy())
+    assert 'SynonymReplaced' in replaced_df.columns
+    try:
+        pandas.testing.assert_series_equal(replaced_df['SynonymReplaced'], replaced_df['ReviewText'], True, "equiv",
+                                           True, False, False)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError
+    pandas.testing.assert_series_equal(replaced_df['ReviewText'], old_df['ReviewText'])
+
+
 
 
 
