@@ -73,4 +73,6 @@ def run_sentiment_mr3(df):
     del df["ReviewTextNegativeRemoved"]
 
 def run_tests(df):
-    pass
+    run_sentiment_mr1(df)
+    run_sentiment_mr2(df)
+    run_sentiment_mr3(df)

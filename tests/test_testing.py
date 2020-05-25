@@ -117,7 +117,11 @@ def test_run_sentiment_mr3(df):
         assert "compound" in row, "compound key missing from row dictionary"
 
 def test_run_tests(df):
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = df.copy()
+
     run_tests(df)
+
     assert "Mr1" in df, "Mr1 missing from dataframe"
     assert "Mr2" in df, "Mr2 missing from dataframe"
     assert "Mr3" in df, "Mr3 missing from dataframe"
