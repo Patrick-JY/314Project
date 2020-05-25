@@ -71,3 +71,8 @@ def run_sentiment_mr3(df):
     df['Mr3'] = df["ReviewTextNegativeRemoved"].apply(lambda row: performSentimentAnalysis(row))
     # Remove columns that are not needed anymore
     del df["ReviewTextNegativeRemoved"]
+
+def run_tests(df):
+    run_sentiment_mr1(df)
+    run_sentiment_mr2(df)
+    run_sentiment_mr3(df)
