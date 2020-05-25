@@ -2,7 +2,12 @@
 import pandas as pd
 import gzip
 from src.utils import join_base_path, get_negative_words, get_positive_words
-
+from nltk.corpus import wordnet as wn
+from nltk import sent_tokenize
+import nltk
+nltk.download("punkt")
+nltk.download("wordnet")
+import random
 # code for data prep is modified from the sample given in http://jmcauley.ucsd.edu/data/amazon/
 
 
@@ -33,9 +38,34 @@ def prepare_amazon(data_frame):
 
 
 def replace_with_synonyms(data_frame):
-    data_frame['SynonymReplaced'] = data_frame['ReviewText']
-    for index, row in data_frame.iterrows():
-        row['SynonymReplaced'] = row['ReviewText']
+    positive_words = get_positive_words()
+    negative_words = get_negative_words()
+    word_list = positive_words + negative_words
+    data_frame['SynonymReplaced'] = data_frame['ReviewText'].apply(lambda row: synonym_replacer(row, word_list))
+
     return data_frame
+
+
+def synonym_replacer(text, word_list):
+    sentences = sent_tokenize(text)
+    result = ""
+    for sentence in sentences:
+        result_words = []
+        words = sentence.split(" ")
+        for word in words:
+            if word.replace(".", "").replace(",", "").lower() in word_list:
+                synonyms = []
+                for syn in wn.synsets(word):
+                    for l in syn.lemmas():
+                        synonyms.append((l.name()))
+                if synonyms:
+                    word = random.choice(synonyms)
+            result_words.append(word)
+        if result != "":
+            result += " "
+        result += ' '.join(result_words)
+        if sentence.endswith(".") and not result.endswith("."):
+            result += "."
+    return result
 
 
