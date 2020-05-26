@@ -53,13 +53,27 @@ def synonym_replacer(text, word_list):
         result_words = []
         words = sentence.split(" ")
         for word in words:
-            if word.replace(".", "").replace(",", "").lower() in word_list:
+            word_stripped_lower = word.replace(".", "").replace(",", "").replace(";", "").lower()
+            if word in word_list:
                 synonyms = []
-                for syn in wn.synsets(word):
+                for syn in wn.synsets(word_stripped_lower):
                     for l in syn.lemmas():
+                        # Skip words that are not in word_list as VaderSentiment can't evaluate these
+                        # Skip words with _ as these can't be parsed either by VaderSentiment
+                        # Skip words that are equal to the original word or are plurals etc. (Need to work on this to exclude all)
+                        # https://stackoverflow.com/questions/14489309/convert-words-between-verb-noun-adjective-forms
+                        # https://stackoverflow.com/questions/32411594/identify-the-word-as-a-noun-verb-or-adjective
+                        if l.name() not in word_list or l.name().lower() in word_stripped_lower or "_" in l.name():
+                            continue
                         synonyms.append((l.name()))
                 if synonyms:
-                    word = random.choice(synonyms)
+                    # fix adding punctuation at end of word
+                    add_end_letter = ""
+                    if word.endswith(","):
+                        add_end_letter = ","
+                    if word.endswith(";"):
+                        add_end_letter = ";"
+                    word = random.choice(synonyms) + add_end_letter
             result_words.append(word)
         if result != "":
             result += " "
