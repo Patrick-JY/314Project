@@ -54,7 +54,7 @@ def remove_negative_words(text, negative_words):
     for sentence in sentences:
         words = sentence.split(" ")
 
-        result_words = [word for word in words if word.replace(".", "").replace(",", "").lower() not in negative_words]
+        result_words = [word for word in words if word.replace(".", "").replace(",", "").replace(";", "").lower() not in negative_words]
         if result != "":
             result += " "
         result += ' '.join(result_words)
