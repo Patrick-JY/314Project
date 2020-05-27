@@ -76,6 +76,7 @@ def run_review_text_sentiment(df):
     df["ReviewTextSentiment"] = df["ReviewText"].apply(lambda row: performSentimentAnalysis(row))
 
 def run_tests(df):
+    run_review_text_sentiment(df)
     run_sentiment_mr1(df)
     run_sentiment_mr2(df)
     run_sentiment_mr3(df)
