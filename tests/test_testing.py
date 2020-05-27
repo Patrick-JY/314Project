@@ -137,6 +137,7 @@ def test_run_tests(df):
 
     run_tests(df)
 
+    assert "ReviewTextSentiment" in df, "ReviewTextSentiment missing from dataframe"
     assert "Mr1" in df, "Mr1 missing from dataframe"
     assert "Mr2" in df, "Mr2 missing from dataframe"
     assert "Mr3" in df, "Mr3 missing from dataframe"
