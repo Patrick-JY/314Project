@@ -1,7 +1,7 @@
 import pytest
 import json
 import pandas as pd
-from src.testing_logic import run_tests, run_review_text_sentiment, capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2, remove_negative_words, prepare_data_mr3, run_sentiment_mr3
+from src.testing_logic import run_tests, run_sentiment_review_text, capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2, remove_negative_words, prepare_data_mr3, run_sentiment_mr3
 from src.pulling_logic import pulling_amazon
 from src.utils import get_positive_words, get_negative_words
 
@@ -116,11 +116,11 @@ def test_run_sentiment_mr3(df):
         assert "neu" in row, "neu key missing from row"
         assert "compound" in row, "compound key missing from row dictionary"
 
-def test_run_review_text_sentiment(df):
+def test_run_sentiment_review_text(df):
     # get a copy of the dataframe so that it is unaffected by other tests
     df = df.copy()
 
-    run_review_text_sentiment(df)
+    run_sentiment_review_text(df)
 
     for row in df["ReviewTextSentiment"]:
         assert type(row) == dict
