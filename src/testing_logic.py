@@ -72,6 +72,9 @@ def run_sentiment_mr3(df):
     # Remove columns that are not needed anymore
     del df["ReviewTextNegativeRemoved"]
 
+def run_review_text_sentiment(df):
+    pass
+
 def run_tests(df):
     run_sentiment_mr1(df)
     run_sentiment_mr2(df)
