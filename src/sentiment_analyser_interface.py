@@ -5,5 +5,11 @@ _analyzer = SentimentIntensityAnalyzer()
 def performSentimentAnalysis(text):
     threshold = 0.05
     results = _analyzer.polarity_scores(text)
-    results.update(text=text, predicted_sentiment='positive' if results['compound'] >= threshold else 'negative')
+    if results['compound'] >= threshold:
+        predicted_sentiment = 'positive'
+    elif results['compound'] <= -threshold:
+        predicted_sentiment = 'negative'
+    else:
+        predicted_sentiment = 'neutral'
+    results.update(text=text, predicted_sentiment=predicted_sentiment)
     return results

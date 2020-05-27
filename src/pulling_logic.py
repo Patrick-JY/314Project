@@ -5,8 +5,8 @@ from src.utils import join_base_path, get_negative_words, get_positive_words
 from nltk.corpus import wordnet as wn
 from nltk import sent_tokenize
 import nltk
-nltk.download("punkt")
-nltk.download("wordnet")
+nltk.download("punkt", quiet=True)
+nltk.download("wordnet", quiet=True)
 import random
 # code for data prep is modified from the sample given in http://jmcauley.ucsd.edu/data/amazon/
 

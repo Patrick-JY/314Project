@@ -15,3 +15,7 @@ for file paths to get a path relative to the base package directory use
     from src.utils import join_base_path
 
     relative_path = join_base_path(path)
+    
+To run program use
+    python -m vadertester -i amount
+    where amount is the amount of rows to use for testing   
