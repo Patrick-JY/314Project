@@ -36,7 +36,6 @@ def prepare_amazon(data_frame):
                        , data_frame['overall']], axis=1, keys=['ID', 'ReviewText', 'ReviewScore'])
     return df
 
-
 def replace_with_synonyms(data_frame):
     positive_words = get_positive_words()
     negative_words = get_negative_words()
@@ -82,4 +81,5 @@ def synonym_replacer(text, word_list):
             result += "."
     return result
 
-
+def random_sample(df, n):
+    pass

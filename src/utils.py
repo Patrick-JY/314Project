@@ -33,4 +33,3 @@ def get_negative_words():
     return negative_words
 
 
-

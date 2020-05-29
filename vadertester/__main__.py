@@ -8,6 +8,7 @@ def main():
     parser = create_parser()
     args = parser.parse_args()
     df = pulling_amazon("Amazon_githubdata.json.gz")
+
     run_tests(df)
     #report_generation(df)
     print("Vader tester finished")
