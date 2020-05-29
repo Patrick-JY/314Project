@@ -41,7 +41,7 @@ def test_amazon_pulling():
     assert not errors, "errors occurred:\n{}".format("\n".join(errors))
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def amazon_data_frame():
     return pulling_logic.pulling_amazon("Amazon_githubdata.json.gz")
 
@@ -60,6 +60,19 @@ def test_synonym_replacement(amazon_data_frame):
         raise AssertionError
     pandas.testing.assert_series_equal(replaced_df['ReviewText'], old_df['ReviewText'])
 
+def test_random_sample(amazon_data_frame):
+    for n in range(1, len(amazon_data_frame), 100):
+        df = amazon_data_frame.copy()
+        sample1 = pulling_logic.random_sample(df, n)
+        assert len(sample1) == n
+        sample2 = pulling_logic.random_sample(df, n)
+        assert len(sample2) == n
+        try:
+            pandas.testing.assert_series_equal(sample1, sample2)
+        except AssertionError:
+            pass
+        else:
+            AssertionError("sample1 and sample2 should be different")
 
 
 
