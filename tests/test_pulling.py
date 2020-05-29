@@ -62,18 +62,17 @@ def test_synonym_replacement(amazon_data_frame):
 
 def test_random_sample(amazon_data_frame):
     for n in range(1, len(amazon_data_frame), 100):
-        df1 = amazon_data_frame.copy()
-        sample1 = pulling_logic.random_sample(df1, n)
+        df = amazon_data_frame.copy()
+        sample1 = pulling_logic.random_sample(df, n)
         assert len(sample1) == n
-        df2 = amazon_data_frame.copy()
-        sample2 = pulling_logic.random_sample(df2, n)
+        sample2 = pulling_logic.random_sample(df, n)
         assert len(sample2) == n
         try:
-            pandas.testing.assert_series_equal(df1, df2)
+            pandas.testing.assert_series_equal(sample1, sample2)
         except AssertionError:
             pass
         else:
-            AssertionError
+            AssertionError("sample1 and sample2 should be different")
 
 
 

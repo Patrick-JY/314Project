@@ -82,4 +82,6 @@ def synonym_replacer(text, word_list):
     return result
 
 def random_sample(df, n):
-    pass
+    sample = df.sample(n)
+    sample.reset_index(inplace = True, drop=True)
+    return sample
