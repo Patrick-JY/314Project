@@ -133,3 +133,4 @@ def run_tests(df):
     run_sentiment_mr1(df)
     run_sentiment_mr2(df)
     run_sentiment_mr3(df)
+    run_sentiment_mr4(df)

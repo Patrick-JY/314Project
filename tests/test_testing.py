@@ -170,3 +170,4 @@ def test_run_tests(amazon_data_frame):
     assert "Mr1" in df, "Mr1 missing from dataframe"
     assert "Mr2" in df, "Mr2 missing from dataframe"
     assert "Mr3" in df, "Mr3 missing from dataframe"
+    assert "Mr4" in df, "Mr4 missing from dataframe"
