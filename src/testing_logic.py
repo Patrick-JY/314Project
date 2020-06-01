@@ -83,9 +83,6 @@ def replace_with_synonyms(data_frame):
     word_list = positive_words + negative_words
     data_frame['SynonymReplaced'] = data_frame['ReviewText'].apply(lambda row: synonym_replacer(row, word_list))
 
-    return data_frame
-
-
 def synonym_replacer(text, word_list):
     sentences = sent_tokenize(text)
     result = ""
@@ -123,7 +120,10 @@ def synonym_replacer(text, word_list):
     return result
 
 def run_sentiment_mr4(df):
-    pass
+    replace_with_synonyms(df)
+    df['Mr4'] = df["SynonymReplaced"].apply(lambda row: performSentimentAnalysis(row))
+    # Remove columns that are not needed anymore
+    del df["SynonymReplaced"]
 
 def run_sentiment_mr0(df):
     df["Mr0"] = df["ReviewText"].apply(lambda row: performSentimentAnalysis(row))

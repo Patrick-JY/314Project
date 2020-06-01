@@ -119,7 +119,8 @@ def test_run_sentiment_mr3(amazon_data_frame):
 # Tests the synonym_replacement function
 def test_synonym_replacement(amazon_data_frame):
     old_df = amazon_data_frame
-    replaced_df = replace_with_synonyms(amazon_data_frame.copy())
+    replaced_df = amazon_data_frame.copy()
+    replace_with_synonyms(replaced_df)
     assert 'SynonymReplaced' in replaced_df.columns
     try:
         pd.testing.assert_series_equal(replaced_df['SynonymReplaced'], replaced_df['ReviewText'], True, "equiv",
