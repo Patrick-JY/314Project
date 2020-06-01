@@ -1,7 +1,7 @@
 from src.sentiment_analyser_interface import performSentimentAnalysis
 from nltk import sent_tokenize
 import nltk
-nltk.download('punkt')
+nltk.download('punkt', quiet=True)
 
 from src.utils import get_positive_words, get_negative_words
 
@@ -54,7 +54,7 @@ def remove_negative_words(text, negative_words):
     for sentence in sentences:
         words = sentence.split(" ")
 
-        result_words = [word for word in words if word.replace(".", "").replace(",", "").lower() not in negative_words]
+        result_words = [word for word in words if word.replace(".", "").replace(",", "").replace(";", "").lower() not in negative_words]
         if result != "":
             result += " "
         result += ' '.join(result_words)
@@ -72,7 +72,11 @@ def run_sentiment_mr3(df):
     # Remove columns that are not needed anymore
     del df["ReviewTextNegativeRemoved"]
 
+def run_sentiment_mr0(df):
+    df["Mr0"] = df["ReviewText"].apply(lambda row: performSentimentAnalysis(row))
+
 def run_tests(df):
+    run_sentiment_mr0(df)
     run_sentiment_mr1(df)
     run_sentiment_mr2(df)
     run_sentiment_mr3(df)
