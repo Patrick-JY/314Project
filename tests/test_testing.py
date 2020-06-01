@@ -1,7 +1,7 @@
 import pytest
 import json
 import pandas as pd
-from src.testing_logic import run_tests, run_sentiment_mr0, replace_with_synonyms, capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2, remove_negative_words, prepare_data_mr3, run_sentiment_mr3
+from src.testing_logic import run_tests, run_sentiment_mr0, run_sentiment_mr4, replace_with_synonyms, capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2, remove_negative_words, prepare_data_mr3, run_sentiment_mr3
 from src.pulling_logic import pulling_amazon
 from src.utils import get_positive_words, get_negative_words
 
@@ -129,6 +129,20 @@ def test_synonym_replacement(amazon_data_frame):
     else:
         raise AssertionError
     pd.testing.assert_series_equal(replaced_df['ReviewText'], old_df['ReviewText'])
+
+def test_run_sentiment_mr4(amazon_data_frame):
+    # get a copy of the dataframe so that it is unaffected by other tests
+    df = amazon_data_frame.copy()
+
+    run_sentiment_mr4(df)
+    for row in df["Mr4"]:
+        assert type(row) == dict
+        assert "text" in row, "text key missing from row"
+        assert "predicted_sentiment" in row, "predicted_sentiment key missing from row"
+        assert "pos" in row, "pos key missing from row"
+        assert "neg" in row, "neg key missing from row"
+        assert "neu" in row, "neu key missing from row"
+        assert "compound" in row, "compound key missing from row dictionary"
 
 def test_run_sentiment_mr0(amazon_data_frame):
     # get a copy of the dataframe so that it is unaffected by other tests

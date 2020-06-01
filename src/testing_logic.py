@@ -122,6 +122,9 @@ def synonym_replacer(text, word_list):
             result += "."
     return result
 
+def run_sentiment_mr4(df):
+    pass
+
 def run_sentiment_mr0(df):
     df["Mr0"] = df["ReviewText"].apply(lambda row: performSentimentAnalysis(row))
 
