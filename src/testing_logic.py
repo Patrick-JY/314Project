@@ -1,7 +1,11 @@
 from src.sentiment_analyser_interface import performSentimentAnalysis
 from nltk import sent_tokenize
+from nltk.corpus import wordnet as wn
+from nltk import sent_tokenize
 import nltk
-nltk.download('punkt', quiet=True)
+nltk.download("punkt", quiet=True)
+nltk.download("wordnet", quiet=True)
+import random
 
 from src.utils import get_positive_words, get_negative_words
 
@@ -71,6 +75,52 @@ def run_sentiment_mr3(df):
     df['Mr3'] = df["ReviewTextNegativeRemoved"].apply(lambda row: performSentimentAnalysis(row))
     # Remove columns that are not needed anymore
     del df["ReviewTextNegativeRemoved"]
+
+
+def replace_with_synonyms(data_frame):
+    positive_words = get_positive_words()
+    negative_words = get_negative_words()
+    word_list = positive_words + negative_words
+    data_frame['SynonymReplaced'] = data_frame['ReviewText'].apply(lambda row: synonym_replacer(row, word_list))
+
+    return data_frame
+
+
+def synonym_replacer(text, word_list):
+    sentences = sent_tokenize(text)
+    result = ""
+    for sentence in sentences:
+        result_words = []
+        words = sentence.split(" ")
+        for word in words:
+            word_stripped_lower = word.replace(".", "").replace(",", "").replace(";", "").lower()
+            if word in word_list:
+                synonyms = []
+                for syn in wn.synsets(word_stripped_lower):
+                    for l in syn.lemmas():
+                        # Skip words that are not in word_list as VaderSentiment can't evaluate these
+                        # Skip words with _ as these can't be parsed either by VaderSentiment
+                        # Skip words that are equal to the original word or are plurals etc. (Need to work on this to exclude all)
+                        # https://stackoverflow.com/questions/14489309/convert-words-between-verb-noun-adjective-forms
+                        # https://stackoverflow.com/questions/32411594/identify-the-word-as-a-noun-verb-or-adjective
+                        if l.name() not in word_list or l.name().lower() in word_stripped_lower or "_" in l.name():
+                            continue
+                        synonyms.append((l.name()))
+                if synonyms:
+                    # fix adding punctuation at end of word
+                    add_end_letter = ""
+                    if word.endswith(","):
+                        add_end_letter = ","
+                    if word.endswith(";"):
+                        add_end_letter = ";"
+                    word = random.choice(synonyms) + add_end_letter
+            result_words.append(word)
+        if result != "":
+            result += " "
+        result += ' '.join(result_words)
+        if sentence.endswith(".") and not result.endswith("."):
+            result += "."
+    return result
 
 def run_sentiment_mr0(df):
     df["Mr0"] = df["ReviewText"].apply(lambda row: performSentimentAnalysis(row))
