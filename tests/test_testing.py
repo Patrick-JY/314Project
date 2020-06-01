@@ -131,6 +131,9 @@ def test_synonym_replacement(amazon_data_frame):
         raise AssertionError
     pd.testing.assert_series_equal(replaced_df['ReviewText'], old_df['ReviewText'])
 
+
+
+
 def test_run_sentiment_mr4(amazon_data_frame):
     # get a copy of the dataframe so that it is unaffected by other tests
     df = amazon_data_frame.copy()
