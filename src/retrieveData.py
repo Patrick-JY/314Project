@@ -71,7 +71,7 @@ def calculate_data(df2,check):
 
     print('Positive results: ' + str(pos) + " : " + str(pos_percent) + "%")
     print('Negative results: ' + str(neg) + " : " + str(neg_percent) + "%")
-    print('Margin of error: ' + str(margin_of_error))
+    print('Difference: ' + str(margin_of_error) + "%")
     return
 
 
