@@ -11,7 +11,8 @@ def amazon_data_frame_tested():
     run_tests(df)
     return df
 
-def test_calculate_test1():
+def test_calculate_test1(df):
+    calculate_test1(df)
     #write test here then code
     raise
 
