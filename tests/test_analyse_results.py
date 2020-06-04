@@ -11,14 +11,14 @@ def amazon_data_frame_tested():
     run_tests(df)
     return df
 
-def test_calculate_test1(df):
-    results = calculate_test1(df)
+def test_calculate_test1(amazon_data_frame_tested):
+    results = calculate_test1(amazon_data_frame_tested)
     assert "positive_accuracy" in results
     assert "neutral_accuracy" in results
     assert "negative_accuracy" in results
     assert "overall_accuracy" in results
     # check it is an float etc.
-    
+
     #write test here then code
     raise
 
