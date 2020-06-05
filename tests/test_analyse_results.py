@@ -18,5 +18,7 @@ def test_calculate_test1(amazon_data_frame_tested):
 
 def test_calculate_test5(amazon_data_frame_tested):
     result = calculate_test5(amazon_data_frame_tested)
-    assert result and type(result) == float
+    assert result, "result cannot be null"
+    assert type(result) == float, "result should be a float"
+    assert 0 <= result <= 100, "result should be in range 0 to 100"
 

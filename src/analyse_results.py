@@ -1,5 +1,12 @@
 def calculate_test1(df):
     pass
 
+
 def calculate_test5(df):
-    pass
+    threshold = 0.25
+    total_rows = len(df)
+    rows_passed = 0
+    for i, row in df.iterrows():
+        if abs(row["Mr0"]["compound"] - row["Mr4"]["compound"]) <= threshold:
+            rows_passed += 1
+    return 100 * rows_passed / total_rows
