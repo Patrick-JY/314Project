@@ -13,7 +13,6 @@ class Test:
         assert parsed.amount == 10
 
     def test_argsinput(self):
-        print('test argument --input')
         parsed = self.parser.parse_args(['--input', '50'])
         assert parsed.amount == 50
 
@@ -21,5 +20,9 @@ class Test:
         with pytest.raises(SystemExit):
             self.parser.parse_args(['-i', 'Hi'])
     def test_inputfile(self):
-        parsed = self.parser.parse_args(["-f","Demo.json"])
-        assert parsed.file == "Demo.json"
+        parsed = self.parser.parse_args(['-i','100','-f','Demo.json'])
+        assert parsed.file_input == "Demo.json"
+        assert parsed.amount == 100
+    def test_inputfile1(self):
+        parsed = self.parser.parse_args(['-i','10'])
+        assert parsed.file_input == 'Amazon_githubdata.json'
