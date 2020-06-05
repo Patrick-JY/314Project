@@ -10,3 +10,12 @@ def report_generation(df):
 
     # Test print
     print(df.head(10))
+
+
+#Gonna make the graph in this file if you encounter a conflict just keep both peoples work
+def column_graph_word_length(df):
+    pass
+
+
+def prepare_word_length(df):
+    pass
