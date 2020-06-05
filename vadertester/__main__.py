@@ -7,7 +7,7 @@ def main():
     print("Vader tester started")
     parser = create_parser()
     args = parser.parse_args()
-    df = random_sample(pulling_amazon("Amazon_githubdata.json.gz"), args.amount)
+    df = random_sample(pulling_amazon(args.file_input), args.amount)
 
     run_tests(df)
     #report_generation(df)
