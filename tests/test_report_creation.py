@@ -29,9 +29,6 @@ def test_column_graph_word_length(tested_data_frame):
 def test_prepare_word_length(tested_data_frame):
     df = tested_data_frame.copy()
     output_df = report_creation.prepare_word_length(df)
-    pd.set_option("display.max_rows", None, "display.max_columns", None)
-    x = []
-    df["ReviewText"].apply(lambda row: x.append(len(row.split())))
 
     # Pre Defined Values for the github dataset
     cat1 = 24
@@ -39,6 +36,20 @@ def test_prepare_word_length(tested_data_frame):
     cat3 = 3
     cat4 = 1
     cat5 = 3
+
+    assert 'Mr0' in output_df
+    assert 'Mr1' in output_df
+    assert 'Mr2' in output_df
+    assert 'Mr3' in output_df
+    assert 'Mr4' in output_df
+    assert 'cat' in output_df
+    assert 'avgComp' in output_df
+
+    assert len(output_df(output_df['cat'] == 'cat1')) == cat1*5
+    assert len(output_df(output_df['cat'] == 'cat2')) == cat2*5
+    assert len(output_df(output_df['cat'] == 'cat3')) == cat3*5
+    assert len(output_df(output_df['cat'] == 'cat4')) == cat4*5
+    assert len(output_df(output_df['cat'] == 'cat5')) == cat5*5
 
 
 
