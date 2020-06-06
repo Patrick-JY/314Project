@@ -1,6 +1,8 @@
 def calculate_test1(df):
     pass
 
+def calculate_test3(df):
+    pass
 
 def calculate_test4(df):
     total_rows = len(df)
