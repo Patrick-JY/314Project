@@ -1,6 +1,6 @@
 from src.testing_logic import run_tests
 from src.pulling_logic import pulling_amazon, random_sample
-from src.analyse_results import calculate_test1, calculate_test5, calculate_test4, calculate_test3
+from src.analyse_results import calculate_test1, calculate_test5, calculate_test4, calculate_test3, calculate_test2
 import pytest
 
 #update this test
@@ -33,6 +33,12 @@ def test_calculate_test1(amazon_data_frame_tested):
     assert results["overall_accuracy"] is not None, "overall_accuracy cannot be null"
     assert type(results["overall_accuracy"]) == float, "overall_accuracy should be a float"
     assert 0 <= results["overall_accuracy"] <= 100, "result overall_accuracy be in range 0 to 100"
+
+def test_calculate_test2(amazon_data_frame_tested):
+    result = calculate_test2(amazon_data_frame_tested)
+    assert result is not None, "result cannot be null"
+    assert type(result) == float, "result should be a float"
+    assert 0 <= result <= 100, "result should be in range 0 to 100"
 
 def test_calculate_test3(amazon_data_frame_tested):
     result = calculate_test3(amazon_data_frame_tested)

@@ -26,6 +26,9 @@ def calculate_test1(df):
         "negative_accuracy": 100 * negative_correct / total_negative,
         "neutral_accuracy": 100 * neutral_correct / total_neutral}
 
+def calculate_test2(df):
+    pass
+
 def calculate_test3(df):
     total_rows = len(df)
     rows_passed = 0
