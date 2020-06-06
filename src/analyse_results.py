@@ -1,5 +1,30 @@
 def calculate_test1(df):
-    pass
+    total_rows = len(df)
+    total_positive = len(df[df["ReviewScore"].isin([4, 5])])
+    total_negative = len(df[df["ReviewScore"].isin([1, 2])])
+    total_neutral = len(df[df["ReviewScore"] == 3])
+    overall_correct = 0
+    positive_correct = 0
+    negative_correct = 0
+    neutral_correct = 0
+    for i, row in df.iterrows():
+        if row["Mr0"]["predicted_sentiment"] == "positive":
+            if row["ReviewScore"] in [4, 5]:
+                overall_correct += 1
+                positive_correct += 1
+        if row["Mr0"]["predicted_sentiment"] == "neutral":
+            if row["ReviewScore"] == 3:
+                overall_correct += 1
+                neutral_correct += 1
+        if row["Mr0"]["predicted_sentiment"] == "negative":
+            if row["ReviewScore"] in [1, 2]:
+                overall_correct += 1
+                negative_correct += 1
+    return {
+        "overall_accuracy": 100 * overall_correct / total_rows,
+        "positive_accuracy": 100 * positive_correct / total_positive,
+        "negative_accuracy": 100 * negative_correct / total_negative,
+        "neutral_accuracy": 100 * neutral_correct / total_neutral}
 
 def calculate_test3(df):
     total_rows = len(df)
