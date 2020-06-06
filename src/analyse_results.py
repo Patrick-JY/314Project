@@ -2,6 +2,9 @@ def calculate_test1(df):
     pass
 
 
+def calculate_test4(df):
+    pass
+
 def calculate_test5(df):
     threshold = 0.25
     total_rows = len(df)
