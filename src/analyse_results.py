@@ -27,7 +27,12 @@ def calculate_test1(df):
         "neutral_accuracy": 100 * neutral_correct / total_neutral}
 
 def calculate_test2(df):
-    pass
+    total_rows = len(df)
+    rows_passed = 0
+    for row in df["Mr1"]:
+        if row["capitalised"]["compound"] == row["uncapitalised"]["compound"]:
+            rows_passed += 1
+    return 100 * rows_passed / total_rows
 
 def calculate_test3(df):
     total_rows = len(df)
