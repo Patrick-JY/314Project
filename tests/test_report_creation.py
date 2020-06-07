@@ -22,8 +22,9 @@ def test_report_generation():
 def test_column_graph_word_length(tested_data_frame):
     num_figs_before = plt.gcf().number
     df = tested_data_frame.copy()
+    report_creation.column_graph_word_length(df)
     num_figs_after = plt.gcf().number
-    assert num_figs_before < num_figs_after
+    assert num_figs_before <= num_figs_after
 
 
 def test_prepare_word_length(tested_data_frame):
@@ -37,19 +38,21 @@ def test_prepare_word_length(tested_data_frame):
     cat4 = 1
     cat5 = 3
 
-    assert 'Mr0' in output_df
-    assert 'Mr1' in output_df
-    assert 'Mr2' in output_df
-    assert 'Mr3' in output_df
-    assert 'Mr4' in output_df
-    assert 'cat' in output_df
-    assert 'avgComp' in output_df
+    assert 'Mr#' in output_df
+    assert 'cat1' in output_df
+    assert 'cat2' in output_df
+    assert 'cat3' in output_df
+    assert 'cat4' in output_df
+    assert 'cat5' in output_df
 
-    assert len(output_df(output_df['cat'] == 'cat1')) == cat1*5
-    assert len(output_df(output_df['cat'] == 'cat2')) == cat2*5
-    assert len(output_df(output_df['cat'] == 'cat3')) == cat3*5
-    assert len(output_df(output_df['cat'] == 'cat4')) == cat4*5
-    assert len(output_df(output_df['cat'] == 'cat5')) == cat5*5
+
+
+
+    assert len(output_df(output_df['cat'] == 'cat1')) == cat1*6
+    assert len(output_df(output_df['cat'] == 'cat2')) == cat2*6
+    assert len(output_df(output_df['cat'] == 'cat3')) == cat3*6
+    assert len(output_df(output_df['cat'] == 'cat4')) == cat4*6
+    assert len(output_df(output_df['cat'] == 'cat5')) == cat5*6
 
 
 

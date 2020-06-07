@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def report_generation(df):
@@ -12,10 +13,83 @@ def report_generation(df):
     print(df.head(10))
 
 
-#Gonna make the graph in this file if you encounter a conflict just keep both peoples work
 def column_graph_word_length(df):
-    pass
+    graph_df = prepare_word_length(df)
+
+    graph_df.plot(x="cat", y=["comp"])
+
+    plt.show()
 
 
 def prepare_word_length(df):
-    pass
+    output_df = pd.DataFrame()
+    calculate_df = pd.DataFrame()
+    x = 0
+
+    for index, row in df.iterrows():
+        calculate_df.at[x, 'Mr#'] = "Mr0"
+        calculate_df.at[x + 1, "Mr#"] = "Mr1cap"
+        calculate_df.at[x + 2, "Mr#"] = "Mr2"
+        calculate_df.at[x + 3, "Mr#"] = "Mr3"
+        calculate_df.at[x + 4, "Mr#"] = "Mr4"
+        calculate_df.at[x + 5, "Mr#"] = "Mr1uncap"
+        calculate_df.at[x, "comp"] = row["Mr0"].get("compound")
+        calculate_df.at[x + 1, "comp"] = row["Mr1"].get('capitalised').get('compound')
+        calculate_df.at[x + 2, "comp"] = row["Mr2"].get("compound")
+        calculate_df.at[x + 3, "comp"] = row["Mr3"].get("compound")
+        calculate_df.at[x + 4, "comp"] = row["Mr4"].get("compound")
+        calculate_df.at[x + 5, "comp"] = row["Mr1"].get('uncapitalised').get("compound")
+        if len(row['ReviewText'].split()) < 50:
+            calculate_df.at[x, "cat"] = "cat1"
+            calculate_df.at[x+1, "cat"] = "cat1"
+            calculate_df.at[x+2, "cat"] = "cat1"
+            calculate_df.at[x+3, "cat"] = "cat1"
+            calculate_df.at[x+4, "cat"] = "cat1"
+            calculate_df.at[x+5, "cat"] = "cat1"
+
+        elif len(row['ReviewText'].split()) < 100:
+            calculate_df.at[x, "cat"] = "cat2"
+            calculate_df.at[x + 1, "cat"] = "cat2"
+            calculate_df.at[x + 2, "cat"] = "cat2"
+            calculate_df.at[x + 3, "cat"] = "cat2"
+            calculate_df.at[x + 4, "cat"] = "cat2"
+            calculate_df.at[x + 5, "cat"] = "cat2"
+
+        elif len(row['ReviewText'].split()) < 200:
+            calculate_df.at[x, "cat"] = "cat3"
+            calculate_df.at[x + 1, "cat"] = "cat3"
+            calculate_df.at[x + 2, "cat"] = "cat3"
+            calculate_df.at[x + 3, "cat"] = "cat3"
+            calculate_df.at[x + 4, "cat"] = "cat3"
+            calculate_df.at[x + 5, "cat"] = "cat3"
+
+        elif len(row['ReviewText'].split()) < 300:
+            calculate_df.at[x, "cat"] = "cat4"
+            calculate_df.at[x + 1, "cat"] = "cat4"
+            calculate_df.at[x + 2, "cat"] = "cat4"
+            calculate_df.at[x + 3, "cat"] = "cat4"
+            calculate_df.at[x + 4, "cat"] = "cat4"
+            calculate_df.at[x + 5, "cat"] = "cat4"
+
+        elif len(row['ReviewText'].split()) >= 300:
+            calculate_df.at[x, "cat"] = "cat5"
+            calculate_df.at[x + 1, "cat"] = "cat5"
+            calculate_df.at[x + 2, "cat"] = "cat5"
+            calculate_df.at[x + 3, "cat"] = "cat5"
+            calculate_df.at[x + 4, "cat"] = "cat5"
+            calculate_df.at[x + 5, "cat"] = "cat5"
+        x = x + 6
+
+    output_df.at[0, "Mr#"] = "Mr0"
+    output_df.at[1, "Mr#"] = "Mr1uncap"
+    output_df.at[2, "Mr#"] = "Mr1cap"
+    output_df.at[3, "Mr#"] = "Mr2"
+    output_df.at[4, "Mr#"] = "Mr3"
+    output_df.at[5, "Mr#"] = "Mr4"
+
+
+
+
+
+    return output_df
+
