@@ -18,8 +18,10 @@ def column_graph_word_length(df):
 
     graph_df.rename(columns={"cat1": "0-50", "cat2": "50-100", "cat3": "100-200", "cat4": "200-300", "cat5": ">300"}, inplace=True)
     print(graph_df)
-    graph_df.plot(x="Mr#", y=["0-50", "50-100", "100-200", "200-300", ">300"], kind="bar")
-
+    ax = graph_df.plot(x="Mr#", y=["0-50", "50-100", "100-200", "200-300", ">300"], kind="bar")
+    ax.set_xlabel("Metamorphic Relation")
+    ax.set_ylabel("Average Compound Value")
+    ax.legend(title = "Word Length")
     plt.show()
 
 
