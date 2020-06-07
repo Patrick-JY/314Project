@@ -8,6 +8,7 @@ nltk.download("punkt", quiet=True)
 nltk.download("wordnet", quiet=True)
 nltk.download('averaged_perceptron_tagger', quiet=True)
 import random
+import string
 
 from src.utils import get_positive_words, get_negative_words
 
@@ -36,7 +37,7 @@ def remove_positive_words(text, positive_words):
     for sentence in sentences:
         words = sentence.split(" ")
 
-        result_words = [word for word in words if word.replace(".", "").replace(",", "").lower() not in positive_words]
+        result_words = [word for word in words if word.strip(string.punctuation).lower() not in positive_words]
         if result != "":
             result += " "
         result += ' '.join(result_words)
@@ -60,7 +61,7 @@ def remove_negative_words(text, negative_words):
     for sentence in sentences:
         words = sentence.split(" ")
 
-        result_words = [word for word in words if word.replace(".", "").replace(",", "").replace(";", "").lower() not in negative_words]
+        result_words = [word for word in words if word.strip(string.punctuation).lower() not in negative_words]
         if result != "":
             result += " "
         result += ' '.join(result_words)
