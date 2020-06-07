@@ -2,7 +2,8 @@
 import pandas as pd
 import gzip
 from src.utils import join_base_path
-import random
+import re
+
 # code for data prep is modified from the sample given in http://jmcauley.ucsd.edu/data/amazon/
 
 
@@ -29,6 +30,9 @@ def pulling_amazon(dataset):
 def prepare_amazon(data_frame):
     df = pd.concat([data_frame['reviewerID'] + data_frame['unixReviewTime'].astype('str'), data_frame['reviewText']
                        , data_frame['overall']], axis=1, keys=['ID', 'ReviewText', 'ReviewScore'])
+    # adapted from https://stackoverflow.com/questions/43935592/add-space-after-full-stops
+    rx = r"\.(?=\S)"
+    df['ReviewText'] = df["ReviewText"].apply(lambda row: re.sub(rx, ". ", row))
     return df
 
 def random_sample(df, n):
