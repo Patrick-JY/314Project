@@ -13,10 +13,20 @@ def tested_data_frame():
     return df
 
 
-def test_report_generation():
-    df = pd.DataFrame
-    assert df is not df.empty
-    #print(df.head(5))
+def test_report_generation(tested_data_frame, capsys):
+    report_creation.report_generation(tested_data_frame.copy())
+    captured = capsys.readouterr()
+    assert captured.out.startswith("Tests Running \n Test 1:")
+    assert "overall_accuracy" in captured.out
+    assert "positive_accuracy" in captured.out
+    assert "negative_accuracy" in captured.out
+    assert "neutral_accuracy" in captured.out
+    assert "Test 2: " in captured.out
+    assert "Test 3: " in captured.out
+    assert "Test 4: " in captured.out
+    assert "Test 5: " in captured.out
+
+
 
 
 def test_column_graph_word_length(tested_data_frame):
