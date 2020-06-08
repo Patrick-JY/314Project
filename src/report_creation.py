@@ -4,19 +4,45 @@ from src.analyse_results import calculate_test1, calculate_test5, calculate_test
 
 
 def report_generation(df):
-    print("Tests Running \n Test 1: ")
-    print(calculate_test1(df))
+    print("Tests Running \n Test 1: Accuracy of the Un-Modified DataSet")
+    test1_result = calculate_test1(df)
+    test_pass = [False, False, False, False, False]
+    print("Overall Accuracy: " + test1_result['overall_accuracy'])
+    print("Positive Accuracy: " + test1_result['positive_accuracy'])
+    print("Negative Accuracy: " + test1_result['negative_accuracy'])
+    print("Neutral Accuracy: " + test1_result['neutral_accuracy'])
+
+    if test1_result['overall_accuracy'] < 50:
+        print("Test 1 Failed")
+    else:
+        print("Test 1 Passed")
+        test_pass[0] = True
+
     print("Test 2: ")
-    print(calculate_test2(df))
+    test2_result = calculate_test2(df)
+    print("Comparing the capitalised dataset and the un-capitalised dataset: ")
+    print("They are " + test2_result + "% the same")
+
+    if test2_result < 90:
+        print("Test 2 Failed")
+    else:
+        print("Test 2 Passed")
+        test_pass[1] = True
+
     print("Test 3: ")
-    print(calculate_test3(df))
+    test3_result = calculate_test3(df)
+    print("Comparing Mr2 to the original DataSet")
+    if test3_result < 90:
+        print("Test 3 Failed")
+    else:
+        print("Test 3 Passed")
+        test_pass[2] = True
+
     print("Test 4: ")
     print(calculate_test4(df))
     print("Test 5: ")
     print(calculate_test5(df))
-    print("\n\n")
-    print("Outputting Graphs: ")
-    print("\n ")
+    print("Outputting Graphs: \n")
     print("Column Graph grouped by Word length")
     column_graph_word_length(df)
 

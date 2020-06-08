@@ -16,11 +16,11 @@ def tested_data_frame():
 def test_report_generation(tested_data_frame, capsys):
     report_creation.report_generation(tested_data_frame.copy())
     captured = capsys.readouterr()
-    assert captured.out.startswith("Tests Running \n Test 1:")
-    assert "overall_accuracy" in captured.out
-    assert "positive_accuracy" in captured.out
-    assert "negative_accuracy" in captured.out
-    assert "neutral_accuracy" in captured.out
+    assert captured.out.startswith("Tests Running \n Test 1: Accuracy of the Un-Modified DataSet")
+    assert "Overall Accuracy: " in captured.out
+    assert "Positive Accuracy:" in captured.out
+    assert "Negative Accuracy" in captured.out
+    assert "Neutral Accuracy" in captured.out
     assert "Test 2: " in captured.out
     assert "Test 3: " in captured.out
     assert "Test 4: " in captured.out
