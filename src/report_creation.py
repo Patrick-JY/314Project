@@ -1,23 +1,78 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from src.analyse_results import calculate_test1, calculate_test5, calculate_test4, calculate_test3, calculate_test2
 
 
 def report_generation(df):
-    # Create new data from input argument
-    df = pd.DataFrame()
+    print("Tests Running \n Test 1: Accuracy of the Un-Modified DataSet")
+    test1_result = calculate_test1(df)
+    test_pass = [False, False, False, False, False]
+    print("Overall Accuracy: " + str(test1_result['overall_accuracy']))
+    print("Positive Accuracy: " + str(test1_result['positive_accuracy']))
+    print("Negative Accuracy: " + str(test1_result['negative_accuracy']))
+    print("Neutral Accuracy: " + str(test1_result['neutral_accuracy']))
 
-    # Create new headers for analysis of data
-    df.columns = ['Correctness(%)', 'Positive/Negative', 'Number of Reviews', 'Score Ratio']
+    if test1_result['overall_accuracy'] < 50:
+        print("Test 1 Failed\n")
+    else:
+        print("Test 1 Passed\n")
+        test_pass[0] = True
 
-    # Test print
-    print(df.head(10))
+    print("Test 2: ")
+    test2_result = calculate_test2(df)
+    print("Comparing the capitalised dataset and the un-capitalised dataset: ")
+    print("They are " + str(test2_result) + "% the same")
+
+    if test2_result < 90:
+        print("Test 2 Failed\n")
+    else:
+        print("Test 2 Passed\n")
+        test_pass[1] = True
+
+    print("Test 3: ")
+    test3_result = calculate_test3(df)
+    print("Comparing Mr2 to the original Dataset")
+    print("Mr2 is " + str(test3_result) + "% similar to Mr0")
+    if test3_result < 90:
+        print("Test 3 Failed\n")
+    else:
+        print("Test 3 Passed\n")
+        test_pass[2] = True
+
+    print("Test 4: ")
+    test4_result = calculate_test4(df)
+    print("Comparing Mr3 to the original Dataset")
+    print("Mr3 is " + str(test4_result) + "% similar to Mr0")
+    if test4_result < 90:
+        print("Test 4 Failed\n")
+    else:
+        print("Test 4 Passed\n")
+        test_pass[3] = True
+
+    print("Test 5: ")
+    test5_result = calculate_test5(df)
+    print("Comparing Mr4 within a threshold of the original Dataset")
+    print("Mr4 is " + str(test5_result) + "% within a threshold similar to Mr0")
+    if test5_result < 90:
+        print("Test 5 failed\n")
+    else:
+        print("Test 5 passed\n")
+        test_pass[4] = True
+
+    print("Outputting Graphs:")
+    print("Column Graph grouped by Word length")
+    column_graph_word_length(df)
+
+    print("Outputting Summary: \n")
+    summary_table(test_pass)
+
 
 
 def column_graph_word_length(df):
     graph_df = prepare_word_length(df)
 
     graph_df.rename(columns={"cat1": "0-50", "cat2": "50-100", "cat3": "100-200", "cat4": "200-300", "cat5": ">300"}, inplace=True)
-    print(graph_df)
+
     ax = graph_df.plot(x="Mr#", y=["0-50", "50-100", "100-200", "200-300", ">300"], kind="bar")
     ax.set_xlabel("Metamorphic Relation")
     ax.set_ylabel("Average Compound Value")
@@ -127,4 +182,22 @@ def prepare_word_length(df):
 
 
     return output_df
+
+
+def summary_table(test_pass):
+    df = pd.DataFrame()
+    fig, ax = plt.subplots()
+
+    # hide axes
+    fig.patch.set_visible(False)
+    ax.axis('off')
+    ax.axis('tight')
+
+    df.insert(0, "Test Numbers", [1,2,3,4,5])
+    df.insert(1, "Passed" , test_pass)
+    ax.table(cellText=df.values, colLabels=df.columns, loc='center')
+    fig.tight_layout()
+
+    plt.show()
+
 
