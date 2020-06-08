@@ -31,7 +31,8 @@ def report_generation(df):
 
     print("Test 3: ")
     test3_result = calculate_test3(df)
-    print("Comparing Mr2 to the original DataSet")
+    print("Comparing Mr2 to the original Dataset")
+    print("Mr2 is " + test3_result + "% similar to Mr0")
     if test3_result < 90:
         print("Test 3 Failed")
     else:
@@ -39,9 +40,25 @@ def report_generation(df):
         test_pass[2] = True
 
     print("Test 4: ")
-    print(calculate_test4(df))
+    test4_result = calculate_test4(df)
+    print("Comparing Mr3 to the original Dataset")
+    print("Mr3 is " + test3_result + "% similar to Mr0")
+    if test4_result < 90:
+        print("Test 4 Failed")
+    else:
+        print("Test 4 Passed")
+        test_pass[3] = True
+
     print("Test 5: ")
-    print(calculate_test5(df))
+    test5_result = calculate_test5(df)
+    print("Comparing Mr4 within a threshold of the original Dataset")
+    print("Mr4 is " + test4_result + "% within a threshold similar to Mr0")
+    if test5_result < 90:
+        print("Test 5 failed")
+    else:
+        print("Test 5 passed")
+        test_pass[4] = True
+
     print("Outputting Graphs: \n")
     print("Column Graph grouped by Word length")
     column_graph_word_length(df)
