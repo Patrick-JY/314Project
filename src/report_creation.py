@@ -193,8 +193,8 @@ def summary_table(test_pass):
     ax.axis('off')
     ax.axis('tight')
 
-    df.insert(0, "Test Numbers", [1,2,3,4,5])
-    df.insert(1, "Passed" , test_pass)
+    df.insert(0, "Test Numbers", [1, 2, 3, 4, 5])
+    df.insert(1, "Passed", test_pass)
     ax.table(cellText=df.values, colLabels=df.columns, loc='center')
     fig.tight_layout()
 
