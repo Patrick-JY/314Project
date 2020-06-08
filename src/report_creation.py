@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from src.analyse_results import calculate_test1, calculate_test5, calculate_test4, calculate_test3, calculate_test2
-
+from tqdm import tqdm
 
 def report_generation(df):
     print("Tests Running \n Test 1: Accuracy of the Un-Modified DataSet")
@@ -66,7 +66,7 @@ def report_generation(df):
     print("Outputting Summary: \n")
     summary_table(test_pass)
 
-
+    plt.show()
 
 def column_graph_word_length(df):
     graph_df = prepare_word_length(df)
@@ -77,7 +77,7 @@ def column_graph_word_length(df):
     ax.set_xlabel("Metamorphic Relation")
     ax.set_ylabel("Average Compound Value")
     ax.legend(title = "Word Length")
-    plt.show()
+    plt.draw()
 
 
 def prepare_word_length(df):
@@ -85,7 +85,7 @@ def prepare_word_length(df):
     calculate_df = pd.DataFrame()
     x = 0
     # this monster operation sorts everything into a new dataframe and sorts each comp value into its category
-    for index, row in df.iterrows():
+    for index, row in tqdm(df.iterrows(),total=len(df.index)):
         calculate_df.at[x, 'Mr#'] = "Mr0"
         calculate_df.at[x + 1, "Mr#"] = "Mr1cap"
         calculate_df.at[x + 2, "Mr#"] = "Mr2"
@@ -154,7 +154,7 @@ def prepare_word_length(df):
 
     rowcount = [0, 0, 0, 0, 0]
 
-    for index, row in calculate_df.iterrows():
+    for index, row in tqdm(calculate_df.iterrows(),total=len(calculate_df.index)):
         y = row["Mr#"][-1]
 
         if y == "p":
@@ -198,6 +198,5 @@ def summary_table(test_pass):
     ax.table(cellText=df.values, colLabels=df.columns, loc='center')
     fig.tight_layout()
 
-    plt.show()
-
+    plt.draw()
 
