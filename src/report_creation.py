@@ -13,9 +13,9 @@ def report_generation(df):
     print("Neutral Accuracy: " + str(test1_result['neutral_accuracy']))
 
     if test1_result['overall_accuracy'] < 50:
-        print("Test 1 Failed")
+        print("Test 1 Failed\n")
     else:
-        print("Test 1 Passed")
+        print("Test 1 Passed\n")
         test_pass[0] = True
 
     print("Test 2: ")
@@ -24,9 +24,9 @@ def report_generation(df):
     print("They are " + str(test2_result) + "% the same")
 
     if test2_result < 90:
-        print("Test 2 Failed")
+        print("Test 2 Failed\n")
     else:
-        print("Test 2 Passed")
+        print("Test 2 Passed\n")
         test_pass[1] = True
 
     print("Test 3: ")
@@ -34,9 +34,9 @@ def report_generation(df):
     print("Comparing Mr2 to the original Dataset")
     print("Mr2 is " + str(test3_result) + "% similar to Mr0")
     if test3_result < 90:
-        print("Test 3 Failed")
+        print("Test 3 Failed\n")
     else:
-        print("Test 3 Passed")
+        print("Test 3 Passed\n")
         test_pass[2] = True
 
     print("Test 4: ")
@@ -44,9 +44,9 @@ def report_generation(df):
     print("Comparing Mr3 to the original Dataset")
     print("Mr3 is " + str(test4_result) + "% similar to Mr0")
     if test4_result < 90:
-        print("Test 4 Failed")
+        print("Test 4 Failed\n")
     else:
-        print("Test 4 Passed")
+        print("Test 4 Passed\n")
         test_pass[3] = True
 
     print("Test 5: ")
@@ -54,12 +54,12 @@ def report_generation(df):
     print("Comparing Mr4 within a threshold of the original Dataset")
     print("Mr4 is " + str(test5_result) + "% within a threshold similar to Mr0")
     if test5_result < 90:
-        print("Test 5 failed")
+        print("Test 5 failed\n")
     else:
-        print("Test 5 passed")
+        print("Test 5 passed\n")
         test_pass[4] = True
 
-    print("Outputting Graphs: \n")
+    print("Outputting Graphs:")
     print("Column Graph grouped by Word length")
     column_graph_word_length(df)
 
