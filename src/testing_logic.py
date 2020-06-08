@@ -8,6 +8,7 @@ nltk.download("punkt", quiet=True)
 nltk.download("wordnet", quiet=True)
 nltk.download('averaged_perceptron_tagger', quiet=True)
 import random
+import string
 
 from src.utils import get_positive_words, get_negative_words
 
@@ -36,7 +37,7 @@ def remove_positive_words(text, positive_words):
     for sentence in sentences:
         words = sentence.split(" ")
 
-        result_words = [word for word in words if word.replace(".", "").replace(",", "").lower() not in positive_words]
+        result_words = [word for word in words if word.strip(string.punctuation).lower() not in positive_words]
         if result != "":
             result += " "
         result += ' '.join(result_words)
@@ -60,7 +61,7 @@ def remove_negative_words(text, negative_words):
     for sentence in sentences:
         words = sentence.split(" ")
 
-        result_words = [word for word in words if word.replace(".", "").replace(",", "").replace(";", "").lower() not in negative_words]
+        result_words = [word for word in words if word.strip(string.punctuation).lower() not in negative_words]
         if result != "":
             result += " "
         result += ' '.join(result_words)
@@ -110,14 +111,11 @@ def synonym_replacer(text, word_list):
         pos_tag = nltk.pos_tag(tokenizer.tokenize(sentence))
 
         words = pos_tag
-
         for tuple_word in words:
             word = list(tuple_word)
-
-            word_stripped_lower = word  # Setting it equal so all the second elements are the same
+            word_stripped_lower = word.copy()  # Setting it equal so all the second elements are the same
 
             word_stripped_lower[0] = word[0].lower()
-
             if word[0] in word_list:
                 synonyms = []
                 for syn in wn.synsets(word_stripped_lower[0], get_wordnet_pos(word_stripped_lower[1])):
@@ -131,19 +129,19 @@ def synonym_replacer(text, word_list):
                         synonyms.append((l.name()))
                 if synonyms:
                     # fix adding punctuation at end of word
-                    add_end_letter = ""
-                    if word[0].endswith(","):
-                        add_end_letter = ","
-                    if word[0].endswith(";"):
-                        add_end_letter = ";"
-                    word[0] = random.choice(synonyms) + add_end_letter
+                    word[0] = random.choice(synonyms)
             result_words.append(word[0])
-        if result != ("", ".", ",", ";", "\""):
-            result += " "
-        result += ' '.join(result_words)
-        if sentence.endswith(".") and not result.endswith("."):
-            result += "."
-
+        for i, w in enumerate(result_words):
+            if i < len(result_words) - 1:
+                if w not in string.punctuation and result_words[i + 1] not in ['.', ',', '"', ")", "(", "'", '!', ':', ';']:
+                    result += w + " "
+                else:
+                    if w in [".", ",", '!', ':', ';']:
+                        result += w + " "
+                    else:
+                        result += w
+            else:
+                result += w + " "
     return result
 
 def run_sentiment_mr4(df):

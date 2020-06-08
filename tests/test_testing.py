@@ -70,10 +70,14 @@ def test_remove_positive_words():
 def test_prepare_data_mr2(amazon_data_frame):
     # get a copy of the dataframe so that it is unaffected by other tests
     df = amazon_data_frame.copy()
-
+    positive_words = get_positive_words()
     prepare_data_mr2(df)
     assert not df["ReviewText"].equals(df["ReviewTextPositiveRemoved"])
-
+    for w in positive_words:
+        assert df[df["ReviewTextPositiveRemoved"].str.lower().str.contains(' ' + w.lower() + ' ', regex=False)].empty
+        assert df[df["ReviewTextPositiveRemoved"].str.lower().str.contains(' ' + w.lower() + '; ', regex=False)].empty
+        assert df[df["ReviewTextPositiveRemoved"].str.lower().str.contains(' ' + w.lower() + '. ', regex=False)].empty
+        assert df[df["ReviewTextPositiveRemoved"].str.lower().str.contains(' ' + w.lower() + ', ', regex=False)].empty
 
 def test_run_sentiment_mr2(amazon_data_frame):
     # get a copy of the dataframe so that it is unaffected by other tests
@@ -98,9 +102,15 @@ def test_remove_negative_words():
 def test_prepare_data_mr3(amazon_data_frame):
     # get a copy of the dataframe so that it is unaffected by other tests
     df = amazon_data_frame.copy()
-
+    negative_words = get_negative_words()
     prepare_data_mr3(df)
     assert not df["ReviewText"].equals(df["ReviewTextNegativeRemoved"])
+    for w in negative_words:
+        assert df[df["ReviewTextNegativeRemoved"].str.lower().str.contains(' ' + w.lower() + ' ', regex=False)].empty
+        assert df[df["ReviewTextNegativeRemoved"].str.lower().str.contains(' ' + w.lower() + '; ', regex=False)].empty
+        assert df[df["ReviewTextNegativeRemoved"].str.lower().str.contains(' ' + w.lower() + '. ', regex=False)].empty
+        assert df[df["ReviewTextNegativeRemoved"].str.lower().str.contains(' ' + w.lower() + ', ', regex=False)].empty
+
 
 def test_run_sentiment_mr3(amazon_data_frame):
     # get a copy of the dataframe so that it is unaffected by other tests
@@ -130,8 +140,6 @@ def test_synonym_replacement(amazon_data_frame):
     else:
         raise AssertionError
     pd.testing.assert_series_equal(replaced_df['ReviewText'], old_df['ReviewText'])
-
-
 
 
 def test_run_sentiment_mr4(amazon_data_frame):

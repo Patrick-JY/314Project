@@ -3,7 +3,8 @@ import pandas as pd
 import gzip
 from src.utils import join_base_path
 import re
-
+import html
+import unicodedata
 # code for data prep is modified from the sample given in http://jmcauley.ucsd.edu/data/amazon/
 
 
@@ -31,8 +32,9 @@ def prepare_amazon(data_frame):
     df = pd.concat([data_frame['reviewerID'] + data_frame['unixReviewTime'].astype('str'), data_frame['reviewText']
                        , data_frame['overall']], axis=1, keys=['ID', 'ReviewText', 'ReviewScore'])
     # adapted from https://stackoverflow.com/questions/43935592/add-space-after-full-stops
+    # Sanitise data
     rx = r"\.(?=\S)"
-    df['ReviewText'] = df["ReviewText"].apply(lambda row: re.sub(rx, ". ", row))
+    df['ReviewText'] = df["ReviewText"].apply(lambda row: unicodedata.normalize('NFKD',str(html.unescape(re.sub(r"\s+", " ", re.sub(rx, ". ", row))))).replace(". . .", ""))
     return df
 
 def random_sample(df, n):
