@@ -1,3 +1,5 @@
+from tqdm import tqdm
+
 def calculate_test1(df):
     total_rows = len(df)
     total_positive = len(df[df["ReviewScore"].isin([4, 5])])
@@ -7,7 +9,7 @@ def calculate_test1(df):
     positive_correct = 0
     negative_correct = 0
     neutral_correct = 0
-    for i, row in df.iterrows():
+    for i, row in tqdm(df.iterrows(),total=len(df.index), desc="Analysing results test 1", unit="rows"):
         if row["Mr0"]["predicted_sentiment"] == "positive":
             if row["ReviewScore"] in [4, 5]:
                 overall_correct += 1
@@ -29,7 +31,7 @@ def calculate_test1(df):
 def calculate_test2(df):
     total_rows = len(df)
     rows_passed = 0
-    for row in df["Mr1"]:
+    for row in tqdm(df["Mr1"],total=len(df.index), desc="Analysing results test 2", unit="rows"):
         if row["capitalised"]["compound"] == row["uncapitalised"]["compound"]:
             rows_passed += 1
     return 100 * rows_passed / total_rows
@@ -37,7 +39,7 @@ def calculate_test2(df):
 def calculate_test3(df):
     total_rows = len(df)
     rows_passed = 0
-    for i, row in df.iterrows():
+    for i, row in tqdm(df.iterrows(),total=len(df.index), desc="Analysing results test 3", unit="rows"):
         if row["Mr2"]["compound"] <= row["Mr0"]["compound"]:
             rows_passed += 1
     return 100 * rows_passed / total_rows
@@ -45,7 +47,7 @@ def calculate_test3(df):
 def calculate_test4(df):
     total_rows = len(df)
     rows_passed = 0
-    for i, row in df.iterrows():
+    for i, row in tqdm(df.iterrows(),total=len(df.index), desc="Analysing results test 4", unit="rows"):
         if row["Mr3"]["compound"] >= row["Mr0"]["compound"]:
             rows_passed += 1
     return 100 * rows_passed / total_rows
@@ -54,7 +56,7 @@ def calculate_test5(df):
     threshold = 0.25
     total_rows = len(df)
     rows_passed = 0
-    for i, row in df.iterrows():
+    for i, row in tqdm(df.iterrows(),total=len(df.index), desc="Analysing results test 5", unit="rows"):
         if abs(row["Mr0"]["compound"] - row["Mr4"]["compound"]) <= threshold:
             rows_passed += 1
     return 100 * rows_passed / total_rows

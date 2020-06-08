@@ -85,7 +85,7 @@ def prepare_word_length(df):
     calculate_df = pd.DataFrame()
     x = 0
     # this monster operation sorts everything into a new dataframe and sorts each comp value into its category
-    for index, row in tqdm(df.iterrows(),total=len(df.index)):
+    for index, row in tqdm(df.iterrows(),total=len(df.index), unit="rows"):
         calculate_df.at[x, 'Mr#'] = "Mr0"
         calculate_df.at[x + 1, "Mr#"] = "Mr1cap"
         calculate_df.at[x + 2, "Mr#"] = "Mr2"
@@ -154,7 +154,7 @@ def prepare_word_length(df):
 
     rowcount = [0, 0, 0, 0, 0]
 
-    for index, row in tqdm(calculate_df.iterrows(),total=len(calculate_df.index)):
+    for index, row in tqdm(calculate_df.iterrows(),total=len(calculate_df.index), unit="rows"):
         y = row["Mr#"][-1]
 
         if y == "p":
