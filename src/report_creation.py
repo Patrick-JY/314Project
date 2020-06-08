@@ -180,3 +180,8 @@ def prepare_word_length(df):
 
     return output_df
 
+
+def summary_table(test_pass):
+    df = pd.DataFrame()
+    fig, ax = plt.subplots()
+

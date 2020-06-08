@@ -58,7 +58,13 @@ def test_prepare_word_length(tested_data_frame):
     assert 'cat5' in output_df
 
 
-
+def test_summary_table(tested_data_frame):
+    num_figs_before = plt.gcf().number
+    df = tested_data_frame.copy()
+    test_pass = [False, True, False, True, False]
+    report_creation.summary_table(test_pass)
+    num_figs_after = plt.gcf().number
+    assert num_figs_before <= num_figs_after
 
 
 
