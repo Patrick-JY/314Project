@@ -25,6 +25,8 @@ def test_report_generation(tested_data_frame, capsys):
     assert "Test 3: " in captured.out
     assert "Test 4: " in captured.out
     assert "Test 5: " in captured.out
+    assert "Outputting Graphs: " in captured.out
+    assert "Column Graph grouped by Word length" in captured.out
 
 
 

@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from src.analyse_results import calculate_test1, calculate_test5, calculate_test4, calculate_test3, calculate_test2
 
+
 def report_generation(df):
     print("Tests Running \n Test 1: ")
     print(calculate_test1(df))
@@ -11,8 +12,13 @@ def report_generation(df):
     print(calculate_test3(df))
     print("Test 4: ")
     print(calculate_test4(df))
-    print ("Test")
-
+    print("Test 5: ")
+    print(calculate_test5(df))
+    print("\n\n")
+    print("Outputting Graphs: ")
+    print("\n ")
+    print("Column Graph grouped by Word length")
+    column_graph_word_length(df)
 
 
 
