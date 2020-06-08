@@ -7,10 +7,10 @@ def report_generation(df):
     print("Tests Running \n Test 1: Accuracy of the Un-Modified DataSet")
     test1_result = calculate_test1(df)
     test_pass = [False, False, False, False, False]
-    print("Overall Accuracy: " + str(test1_result['overall_accuracy']))
-    print("Positive Accuracy: " + str(test1_result['positive_accuracy']))
-    print("Negative Accuracy: " + str(test1_result['negative_accuracy']))
-    print("Neutral Accuracy: " + str(test1_result['neutral_accuracy']))
+    print("Overall Accuracy: " + str(round(test1_result['overall_accuracy'], 2)) + "%")
+    print("Positive Accuracy: " + str(round(test1_result['positive_accuracy'], 2)) + "%")
+    print("Negative Accuracy: " + str(round(test1_result['negative_accuracy'], 2)) + "%")
+    print("Neutral Accuracy: " + str(round(test1_result['neutral_accuracy'], 2)) + "%")
 
     if test1_result['overall_accuracy'] < 50:
         print("Test 1 Failed\n")
@@ -21,7 +21,7 @@ def report_generation(df):
     print("Test 2: ")
     test2_result = calculate_test2(df)
     print("Comparing the capitalised dataset and the un-capitalised dataset: ")
-    print("They are " + str(test2_result) + "% the same")
+    print("They are " + str(round(test2_result, 2)) + "% the same")
 
     if test2_result < 90:
         print("Test 2 Failed\n")
@@ -32,7 +32,7 @@ def report_generation(df):
     print("Test 3: ")
     test3_result = calculate_test3(df)
     print("Comparing Mr2 to the original Dataset")
-    print("Mr2 is " + str(test3_result) + "% similar to Mr0")
+    print("Mr2 is " + str(round(test3_result, 2)) + "% similar to Mr0")
     if test3_result < 90:
         print("Test 3 Failed\n")
     else:
@@ -42,7 +42,7 @@ def report_generation(df):
     print("Test 4: ")
     test4_result = calculate_test4(df)
     print("Comparing Mr3 to the original Dataset")
-    print("Mr3 is " + str(test4_result) + "% similar to Mr0")
+    print("Mr3 is " + str(round(test4_result, 2)) + "% similar to Mr0")
     if test4_result < 90:
         print("Test 4 Failed\n")
     else:
@@ -52,7 +52,7 @@ def report_generation(df):
     print("Test 5: ")
     test5_result = calculate_test5(df)
     print("Comparing Mr4 within a threshold of the original Dataset")
-    print("Mr4 is " + str(test5_result) + "% within a threshold similar to Mr0")
+    print("Mr4 is " + str(round(test5_result, 2)) + "% within a threshold similar to Mr0")
     if test5_result < 80:
         print("Test 5 failed\n")
     else:
