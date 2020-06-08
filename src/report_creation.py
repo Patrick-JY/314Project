@@ -1,16 +1,19 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from src.analyse_results import calculate_test1, calculate_test5, calculate_test4, calculate_test3, calculate_test2
 
 def report_generation(df):
-    # Create new data from input argument
-    df = pd.DataFrame()
+    print("Tests Running \n Test 1: ")
+    print(calculate_test1(df))
+    print("Test 2: ")
+    print(calculate_test2(df))
+    print("Test 3: ")
+    print(calculate_test3(df))
+    print("Test 4: ")
+    print(calculate_test4(df))
+    print ("Test")
 
-    # Create new headers for analysis of data
-    df.columns = ['Correctness(%)', 'Positive/Negative', 'Number of Reviews', 'Score Ratio']
 
-    # Test print
-    print(df.head(10))
 
 
 def column_graph_word_length(df):
