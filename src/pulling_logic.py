@@ -34,7 +34,7 @@ def prepare_amazon(data_frame):
     # adapted from https://stackoverflow.com/questions/43935592/add-space-after-full-stops
     # Sanitise data
     rx = r"\.(?=\S)"
-    df['ReviewText'] = df["ReviewText"].apply(lambda row: str(unicodedata.normalize('NFKD',html.unescape(re.sub(r"\s+", " ", re.sub(rx, ". ", row)))).encode('ascii', 'ignore')).replace(". . .", ""))
+    df['ReviewText'] = df["ReviewText"].apply(lambda row: unicodedata.normalize('NFKD',str(html.unescape(re.sub(r"\s+", " ", re.sub(rx, ". ", row))))).replace(". . .", ""))
     return df
 
 def random_sample(df, n):
