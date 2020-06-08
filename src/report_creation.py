@@ -53,7 +53,7 @@ def report_generation(df):
     test5_result = calculate_test5(df)
     print("Comparing Mr4 within a threshold of the original Dataset")
     print("Mr4 is " + str(test5_result) + "% within a threshold similar to Mr0")
-    if test5_result < 90:
+    if test5_result < 80:
         print("Test 5 failed\n")
     else:
         print("Test 5 passed\n")
