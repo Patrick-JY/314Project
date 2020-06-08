@@ -25,7 +25,7 @@ def amazon_get_df(path):
     i = 0
     df = {}
 
-    with tqdm(total= get_file_size(path),unit="bytes",unit_scale=True,unit_divisor=1024) as pbar:
+    with tqdm(total= get_file_size(path),unit="bytes",unit_scale=True,unit_divisor=1024, desc="Loading data") as pbar:
         for d, l in amazon_parse(path):
             pbar.update(len(l))
             df[i] = d
@@ -39,17 +39,19 @@ def pulling_amazon(dataset):
 
 
 def prepare_amazon(data_frame):
-    df = pd.concat([data_frame['reviewerID'] + data_frame['unixReviewTime'].astype('str'), data_frame['reviewText']
+    df = pd.concat([data_frame['reviewerID'] + data_frame['unixReviewTime'].astype('str'), data_frame['reviewText'].astype('str')
                        , data_frame['overall']], axis=1, keys=['ID', 'ReviewText', 'ReviewScore'])
-    # adapted from https://stackoverflow.com/questions/43935592/add-space-after-full-stops
-    # Sanitise data
-    rx = r"\.(?=\S)"
-    df['ReviewText'] = df["ReviewText"].apply(lambda row: unicodedata.normalize('NFKD',str(html.unescape(re.sub(r"\s+", " ", re.sub(rx, ". ", row))))).replace(". . .", ""))
     return df
 
 def random_sample(df, n):
     sample = df.sample(n)
     sample.reset_index(inplace = True, drop=True)
+    # adapted from https://stackoverflow.com/questions/43935592/add-space-after-full-stops
+    # Sanitise data
+    rx = r"\.(?=\S)"
+    tqdm.pandas(desc="Sanitising text", unit="rows")
+    sample['ReviewText'] = sample["ReviewText"].progress_apply(lambda row: unicodedata.normalize('NFKD', str(
+        html.unescape(re.sub(r"\s+", " ", re.sub(rx, ". ", row))))).replace(". . .", ""))
     return sample
 
 # code thanks to mark adler at
