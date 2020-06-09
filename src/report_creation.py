@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from src.analyse_results import calculate_test1, calculate_test5, calculate_test4, calculate_test3, calculate_test2
 from tqdm import tqdm
 from src.utils import join_base_path
+from tabulate import tabulate
 
 def report_generation(df):
     print("Tests Running \n Test 1: Accuracy of the Un-Modified DataSet")
@@ -199,5 +200,7 @@ def summary_table(test_pass):
     ax.table(cellText=df.values, colLabels=df.columns, loc='center')
     fig.tight_layout()
     plt.savefig(join_base_path("output/summary_table.png"))
+    print(tabulate(df, tablefmt="github", showindex=False, headers=["Test Numbers", "Passed"]))
+    print()
     plt.draw()
 
