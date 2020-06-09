@@ -1,11 +1,9 @@
 from setuptools import setup, find_packages
 
 setup(name='vadertester',
-      version='0.1',
-      description='The funniest joke in the world',
-      url='http://github.com/storborg/funniest',
-      author='Flying Circus',
-      author_email='flyingcircus@example.com',
+      version='1.0',
+      url='https://github.com/Patrick-JY/314Project',
+      author='314 Project',
       license='MIT',
       packages=find_packages(include=['vadertester', 'src', 'tests']),
       package_data={'vadertester': ['json/*.json.gz']},
