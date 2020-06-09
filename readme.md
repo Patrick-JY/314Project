@@ -27,7 +27,7 @@ python -m vadertester
 * -f FILENAME or --file FILENAME, were filename is the name of the json.gz file
 (default for -f is {vadertester_installed_dir}/vadertester/json/reviews_Amazon_Instant_Video_5.json.gz with 37127 rows of data))
 
-Data downloaded from here [here](https://nijianmo.github.io/amazon/index.html#complete-data)
+Data downloaded from [here](https://nijianmo.github.io/amazon/index.html#complete-data)
 
 ### the program will output a 3 files to the current directory
 1. output.txt with the command line output
