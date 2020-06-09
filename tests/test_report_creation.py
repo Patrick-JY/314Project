@@ -41,7 +41,7 @@ def test_column_graph_word_length(tested_data_frame):
 
 def test_prepare_word_length(tested_data_frame):
     df = tested_data_frame.copy()
-    output_df = report_creation.prepare_word_length(df)
+    output_df = report_creation.improved_calculation(df)
 
     # Pre Defined Values for the github dataset
     cat1 = 24
