@@ -1,7 +1,5 @@
 # CSIT 314 Sentiment Analysis
-Find  Amazon datasource at https://nijianmo.github.io/amazon/index.html#complete-data
-
-Datasource used for development - Amazon instant videos 5-core (filename: Amazon_Instant_Video_5.json) this is a smaller dataset.
+The testing tool performs tests on the VADER Sentiment Analysis Python Package (https://github.com/cjhutto/vaderSentiment)
     
 ### To install program from zip file
 ```bash
@@ -29,7 +27,7 @@ python -m vadertester
 
 Data downloaded from [here](https://nijianmo.github.io/amazon/index.html#complete-data)
 
-### the program will output a 3 files to the current directory
+### the program will output 3 files to the current directory
 1. output.txt with the command line output
     ```
        Vader tester started
