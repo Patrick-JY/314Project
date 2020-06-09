@@ -160,3 +160,4 @@ fabric.properties
 /output/column_graph.png
 /output/output.txt
 /output/summary_table.png
+*.png
