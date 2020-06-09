@@ -100,7 +100,7 @@ def improved_calculation(df):
 
     rowcount = [0, 0, 0, 0, 0]
 
-    for index, row in tqdm(df.iterrows(), total=len(df.index), unit = "rows"):
+    for index, row in tqdm(df.iterrows(), total=len(df.index), unit = "rows" , desc = "Generating Column Graph Data"):
         word_length = len(row['ReviewText'].split())
         if word_length < 50:
             add_compound_value("cat1", output_df, row)
