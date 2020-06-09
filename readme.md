@@ -1,4 +1,4 @@
-# CSIT 314 Sentiment Analysis
+# CSIT 314 Sentiment Analysis Testing Tool
 The testing tool performs tests on the VADER Sentiment Analysis Python Package (https://github.com/cjhutto/vaderSentiment)
 
 ### To install program from zip file
