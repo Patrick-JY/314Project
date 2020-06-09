@@ -31,5 +31,49 @@ Data downloaded from here [here](https://nijianmo.github.io/amazon/index.html#co
 
 ### the program will output a 3 files to the current directory
 1. output.txt with the command line output
+    ```
+       Vader tester started
+       Loading test data from "\314Project\vadertester\json\reviews_Amazon_Instant_Video_5.json.gz"
+       Getting 1000 random rows from data
+       Finished loading test data
+       Running tests
+       Finished running tests
+       Displaying output
+       Tests Running 
+       Test 1: Accuracy of the Un-Modified DataSet
+       Overall Accuracy: 75.7%
+       Positive Accuracy: 89.8%
+       Negative Accuracy: 46.74%
+       Neutral Accuracy: 0.88%
+       Test 1 Passed
+       Test 2: 
+       Comparing the capitalised dataset and the un-capitalised dataset: 
+       They are 65.0% the same
+       Test 2 Failed
+       Test 3: 
+       Comparing Mr2 to the original Dataset
+       Mr2 is 98.9% similar to Mr0
+       Test 3 Passed
+       Test 4: 
+       Comparing Mr3 to the original Dataset
+       Mr3 is 95.2% similar to Mr0
+       Test 4 Passed
+       Test 5: 
+       Comparing Mr4 within a threshold of the original Dataset
+       Mr4 is 87.2% within a threshold similar to Mr0
+       Test 5 passed
+       Outputting Graphs:
+       Column Graph grouped by Word length
+       Outputting Summary: 
+       |   Test Numbers | Passed   |
+       |----------------|----------|
+       |              1 | True     |
+       |              2 | False    |
+       |              3 | True     |
+       |              4 | True     |
+       |              5 | True     |
+       Vader tester finished
+    ```
 2. column_graph.png which is a column graph and each MR versus compound value grouped by word length
+      
 3. summary_table.png which is table with the summary of the test results
