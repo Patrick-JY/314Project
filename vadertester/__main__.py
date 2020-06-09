@@ -21,8 +21,6 @@ def main():
         print("Vader tester started")
         parser = create_parser()
         args = parser.parse_args()
-        import os
-        print(os.getcwd())
         print("Loading test data from '" + args.file_input + "'")
         all_df = pulling_amazon(args.file_input)
         print("Getting " + str(args.amount) + " random rows from data")
