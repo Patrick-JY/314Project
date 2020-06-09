@@ -2,11 +2,12 @@ from src.testing_logic import run_tests
 from src.pulling_logic import pulling_amazon, random_sample
 from src.analyse_results import calculate_test1, calculate_test5, calculate_test4, calculate_test3, calculate_test2
 import pytest
+from pkg_resources import resource_filename
 
 #update this test
 @pytest.fixture(scope="session")
 def amazon_data_frame_tested():
-    df = pulling_amazon("Amazon_githubdata.json.gz")
+    df = pulling_amazon(resource_filename("vadertester",  "json/Amazon_githubdata.json.gz"))
     df = random_sample(df, 30)
     run_tests(df)
     return df

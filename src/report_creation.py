@@ -78,7 +78,7 @@ def column_graph_word_length(df):
     ax.set_xlabel("Metamorphic Relation")
     ax.set_ylabel("Average Compound Value")
     ax.legend(title = "Word Length")
-    plt.savefig(join_base_path("output/column_graph.png"))
+    plt.savefig(join_base_path("column_graph.png"))
     plt.draw()
 
 
@@ -199,7 +199,7 @@ def summary_table(test_pass):
     df.insert(1, "Passed", test_pass)
     ax.table(cellText=df.values, colLabels=df.columns, loc='center')
     fig.tight_layout()
-    plt.savefig(join_base_path("output/summary_table.png"))
+    plt.savefig(join_base_path("summary_table.png"))
     print(tabulate(df, tablefmt="github", showindex=False, headers=["Test Numbers", "Passed"]))
     print()
     plt.draw()

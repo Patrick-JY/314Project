@@ -153,7 +153,13 @@ fabric.properties
 
 #ignore datasource
 
-/json/Amazon_Instant_Video_5.json
+/vadertester/json/Amazon_Instant_Video_5.json
 /output/column_graph.png
 /output/output.txt
 /output/summary_table.png
+/tests/column_graph.png
+/tests/output.txt
+/tests/summary_table.png
+/column_graph.png
+/output.txt
+/summary_table.png
