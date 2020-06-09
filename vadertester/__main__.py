@@ -24,6 +24,8 @@ def main():
         print("Loading test data from 'json/" + args.file_input + "'")
         all_df = pulling_amazon(args.file_input)
         print("Getting " + str(args.amount) + " random rows from data")
+        if len(all_df.index) < args.amount:
+            raise Exception("Sample cannot be bigger than dataset amount which is " + str(len(all_df.index)) + " rows")
         random_sample_df = random_sample(all_df, args.amount)
         print("Finished loading test data")
         print("Running tests")
