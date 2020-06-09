@@ -72,6 +72,6 @@ Data downloaded from [here](https://nijianmo.github.io/amazon/index.html#complet
        |              5 | True     |
        Vader tester finished
     ```
-2. column_graph.png which is a column graph and each MR versus compound value grouped by word length
+2. column_graph.png which is a column graph with each MR versus average compound value grouped by word length
       
 3. summary_table.png which is table with the summary of the test results
