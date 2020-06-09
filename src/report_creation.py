@@ -104,44 +104,19 @@ def improved_calculation(df):
     for index, row in tqdm(df.iterrows(), total=len(df.index), unit = "rows"):
         word_length = len(row['ReviewText'].split())
         if word_length < 50:
-            output_df.at[0, "cat1"] += row["Mr0"].get("compound")
-            output_df.at[1, "cat1"] += row["Mr1"].get("uncapitalised").get("compound")
-            output_df.at[2, "cat1"] += row["Mr1"].get("capitalised").get("compound")
-            output_df.at[3, "cat1"] += row["Mr2"].get("compound")
-            output_df.at[4, "cat1"] += row["Mr3"].get("compound")
-            output_df.at[5, "cat1"] += row["Mr4"].get("compound")
+            add_compound_value("cat1", output_df, row)
             rowcount[0] += 1
         elif word_length < 100:
-            output_df.at[0, "cat2"] += row["Mr0"].get("compound")
-            output_df.at[1, "cat2"] += row["Mr1"].get("uncapitalised").get("compound")
-            output_df.at[2, "cat2"] += row["Mr1"].get("capitalised").get("compound")
-            output_df.at[3, "cat2"] += row["Mr2"].get("compound")
-            output_df.at[4, "cat2"] += row["Mr3"].get("compound")
-            output_df.at[5, "cat2"] += row["Mr4"].get("compound")
+            add_compound_value("cat2", output_df, row)
             rowcount[1] += 1
         elif word_length < 200:
-            output_df.at[0, "cat3"] += row["Mr0"].get("compound")
-            output_df.at[1, "cat3"] += row["Mr1"].get("uncapitalised").get("compound")
-            output_df.at[2, "cat3"] += row["Mr1"].get("capitalised").get("compound")
-            output_df.at[3, "cat3"] += row["Mr2"].get("compound")
-            output_df.at[4, "cat3"] += row["Mr3"].get("compound")
-            output_df.at[5, "cat3"] += row["Mr4"].get("compound")
+            add_compound_value("cat3", output_df, row)
             rowcount[2] += 1
         elif word_length < 300:
-            output_df.at[0, "cat4"] += row["Mr0"].get("compound")
-            output_df.at[1, "cat4"] += row["Mr1"].get("uncapitalised").get("compound")
-            output_df.at[2, "cat4"] += row["Mr1"].get("capitalised").get("compound")
-            output_df.at[3, "cat4"] += row["Mr2"].get("compound")
-            output_df.at[4, "cat4"] += row["Mr3"].get("compound")
-            output_df.at[5, "cat4"] += row["Mr4"].get("compound")
+            add_compound_value("cat4", output_df, row)
             rowcount[3] += 1
         elif word_length >= 300:
-            output_df.at[0, "cat5"] += row["Mr0"].get("compound")
-            output_df.at[1, "cat5"] += row["Mr1"].get("uncapitalised").get("compound")
-            output_df.at[2, "cat5"] += row["Mr1"].get("capitalised").get("compound")
-            output_df.at[3, "cat5"] += row["Mr2"].get("compound")
-            output_df.at[4, "cat5"] += row["Mr3"].get("compound")
-            output_df.at[5, "cat5"] += row["Mr4"].get("compound")
+            add_compound_value("cat5", output_df, row)
             rowcount[4] += 1
 
     output_df["cat1"] = output_df["cat1"].div(rowcount[0])
@@ -150,6 +125,15 @@ def improved_calculation(df):
     output_df["cat4"] = output_df["cat4"].div(rowcount[3])
     output_df["cat5"] = output_df["cat5"].div(rowcount[4])
     return output_df
+
+
+def add_compound_value(cat,output_df,row):
+    output_df.at[0, cat] += row["Mr0"].get("compound")
+    output_df.at[1, cat] += row["Mr1"].get("uncapitalised").get("compound")
+    output_df.at[2, cat] += row["Mr1"].get("capitalised").get("compound")
+    output_df.at[3, cat] += row["Mr2"].get("compound")
+    output_df.at[4, cat] += row["Mr3"].get("compound")
+    output_df.at[5, cat] += row["Mr4"].get("compound")
 
 def summary_table(test_pass):
     df = pd.DataFrame()
