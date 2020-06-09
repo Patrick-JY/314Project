@@ -124,7 +124,7 @@ def synonym_replacer(text, word_list):
             word_stripped_lower = word.copy()  # Setting it equal so all the second elements are the same
 
             word_stripped_lower[0] = word[0].lower()
-            if word[0] in word_list:
+            if word_stripped_lower[0]  in word_list:
                 synonym = ""
                 for syn in wn.synsets(word_stripped_lower[0], get_wordnet_pos(word_stripped_lower[1])):
                     for l in syn.lemmas():
