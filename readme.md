@@ -20,7 +20,7 @@ To run program:
     command line options:
     -i amount, where amount is the amount of rows to use for testing (default=1000)
     -f filename, were filename is the name of the json.gz file,
-    downloaded from https://nijianmo.github.io/amazon/index.html#complete-data (default={vadertester_installed_dir}/json/reviews_Amazon_Instant_Video_5.json.gz with 37127 rows of data)
+    downloaded from https://nijianmo.github.io/amazon/index.html#complete-data (default={vadertester_installed_dir}/vadertester/json/reviews_Amazon_Instant_Video_5.json.gz with 37127 rows of data)
     
 
 the program will output a 3 files to the current directory: 
