@@ -85,7 +85,6 @@ def column_graph_word_length(df):
 def improved_calculation(df):
     output_df = pd.DataFrame()
 
-
     output_df.at[0, "Mr#"] = "Mr0"
     output_df.at[1, "Mr#"] = "Mr1uncap"
     output_df.at[2, "Mr#"] = "Mr1cap"
