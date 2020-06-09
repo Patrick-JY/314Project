@@ -4,10 +4,11 @@ import pandas as pd
 from src.testing_logic import run_tests, run_sentiment_mr0, run_sentiment_mr4, replace_with_synonyms, capitalise_all_words, uncapitalise_all_words, prepare_data_mr1, run_sentiment_mr1, run_sentiment_mr2, remove_positive_words, prepare_data_mr2, remove_negative_words, prepare_data_mr3, run_sentiment_mr3
 from src.pulling_logic import pulling_amazon
 from src.utils import get_positive_words, get_negative_words
+from pkg_resources import resource_filename
 
 @pytest.fixture(scope="session")
 def amazon_data_frame():
-    return pulling_amazon("Amazon_githubdata.json.gz")
+    return pulling_amazon(resource_filename("vadertester", "json/Amazon_githubdata.json.gz"))
 
 def test_capitalise_all_words(amazon_data_frame):
     # get a copy of the dataframe so that it is unaffected by other tests

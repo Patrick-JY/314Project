@@ -26,7 +26,7 @@ class TestCli:
 
     def test_inputfile3(self):
         parsed = self.parser.parse_args(['-i','10'])
-        assert parsed.file_input == 'Amazon_githubdata.json.gz'
+        assert parsed.file_input.endswith("json\Amazon_githubdata.json.gz")
 
     def test_type(self):
         parsed = self.parser.parse_args(['-i','10'])

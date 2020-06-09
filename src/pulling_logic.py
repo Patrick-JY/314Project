@@ -34,7 +34,7 @@ def amazon_get_df(path):
 
 
 def pulling_amazon(dataset):
-    df = prepare_amazon(amazon_get_df(join_base_path("json/"+dataset)))
+    df = prepare_amazon(amazon_get_df(dataset))
     return df
 
 
