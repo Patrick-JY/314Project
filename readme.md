@@ -1,6 +1,6 @@
 # CSIT 314 Sentiment Analysis
 The testing tool performs tests on the VADER Sentiment Analysis Python Package (https://github.com/cjhutto/vaderSentiment)
-    
+
 ### To install program from zip file
 ```bash
 pip install filename.zip
@@ -75,3 +75,11 @@ Data downloaded from [here](https://nijianmo.github.io/amazon/index.html#complet
 2. column_graph.png which is a column graph with each MR versus average compound value grouped by word length
       
 3. summary_table.png which is table with the summary of the test results
+
+The default version of the VADER Sentiment tested is 3.3.2
+
+### To install other versions of vaderSentiment to use with the testing tool
+```bash
+pip install vaderSentiment==VERSION_NO 
+where VERSION_NO is the version of vaderSentiment to install
+```
