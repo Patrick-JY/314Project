@@ -10,7 +10,7 @@ To install from unzipped folder:
 
     use 'pip install .' from the unzipped folder
     
-If pip is not install:
+If pip is not installed:
 
     use 'python setup.py install' from the unzipped folder
 
