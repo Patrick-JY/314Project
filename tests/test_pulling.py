@@ -1,7 +1,6 @@
 import src.pulling_logic as pulling_logic
 import pytest
 import pandas
-from pkg_resources import resource_filename
 
 
 # Checks if github workflow is working by just doing a simple auto succeed test
@@ -11,7 +10,7 @@ def test_github():
 
 # Checks the amazon data pulling from the amazon data sets
 def test_amazon_pulling():
-    df = pulling_logic.pulling_amazon(resource_filename("vadertester", "json/Amazon_githubdata.json.gz"))
+    df = pulling_logic.pulling_amazon("Amazon_githubdata.json.gz")
     errors = []
     github_line_amount = 37
     # First checks if the data is being put into a form properly
@@ -44,7 +43,7 @@ def test_amazon_pulling():
 
 @pytest.fixture(scope="session")
 def amazon_data_frame():
-    return pulling_logic.pulling_amazon(resource_filename("vadertester", "json/Amazon_githubdata.json.gz"))
+    return pulling_logic.pulling_amazon("Amazon_githubdata.json.gz")
 
 def test_random_sample(amazon_data_frame):
     for n in range(1, len(amazon_data_frame), 100):

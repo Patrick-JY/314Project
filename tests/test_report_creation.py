@@ -4,11 +4,11 @@ from src.pulling_logic import pulling_amazon
 import src.report_creation as report_creation
 import src.testing_logic as testing_logic
 import matplotlib.pyplot as plt
-from pkg_resources import resource_filename
+
 
 @pytest.fixture(scope="session")
 def tested_data_frame():
-    df = pulling_amazon(resource_filename("vadertester", "json/Amazon_githubdata.json.gz"))
+    df = pulling_amazon("Amazon_githubdata.json.gz")
     testing_logic.run_tests(df)
     return df
 

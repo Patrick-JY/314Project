@@ -1,6 +1,10 @@
 from src.utils import join_base_path, load_vadersentiment_lexicon_data, get_positive_words, get_negative_words
 import os
 
+def test_join_base_path():
+    assert os.path.exists(join_base_path(".314ProjectBaseDir")) == True
+    assert os.path.exists(join_base_path(".314ProjectBaseDirs")) == False
+
 def test_load_vadersentiment_lexicon_data():
     lexicon_data = load_vadersentiment_lexicon_data()
     assert lexicon_data is not None, "No lexicon data was loaded"

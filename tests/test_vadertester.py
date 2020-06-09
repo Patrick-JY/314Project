@@ -1,20 +1,18 @@
 import subprocess
 import sys
 from vadertester.__main__ import main
-from pkg_resources import resource_filename
-
 def test_vadertester(capsys):
-    sys.argv = ['__main__.py', '-i', '20', '-f', resource_filename("vadertester", "json/Amazon_githubdata.json.gz")]
+    sys.argv = ['314Project\\vadertester\\__main__.py', '-i', '20', '-f', 'Amazon_githubdata.json.gz']
     main()
     captured = capsys.readouterr()
     assert "Vader tester started" in captured.out
     assert "Vader tester finished" in captured.out
-    sys.argv = ['__main__.py', '-i', '30']
+    sys.argv = ['314Project\\vadertester\\__main__.py', '-i', '30']
     main()
     captured = capsys.readouterr()
     assert "Vader tester started" in captured.out
     assert "Vader tester finished" in captured.out
-    sys.argv = ['__main__.py']
+    sys.argv = ['314Project\\vadertester\\__main__.py']
     main()
     captured = capsys.readouterr()
     assert "Vader tester started" in captured.out
@@ -26,6 +24,6 @@ def test_vadertester(capsys):
     output2 = str(subprocess.check_output("python -m vadertester -i 25", stderr = subprocess.STDOUT, shell = True))
     assert "Vader tester started" in output2
     assert "Vader tester finished" in output2
-    output3 = str(subprocess.check_output("python -m vadertester -i 20 -f " + resource_filename("vadertester", "json/Amazon_githubdata.json.gz"), stderr=subprocess.STDOUT, shell=True))
+    output3 = str(subprocess.check_output("python -m vadertester -i 20 -f Amazon_githubdata.json.gz", stderr=subprocess.STDOUT, shell=True))
     assert "Vader tester started" in output3
     assert "Vader tester finished" in output3

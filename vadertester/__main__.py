@@ -16,12 +16,12 @@ import sys
 
 def main():
     saved = sys.stdout
-    with open('output.txt', 'w') as fout:
+    with open(join_base_path('output/output.txt'), 'w') as fout:
         sys.stdout = writer(sys.stdout, fout)
         print("Vader tester started")
         parser = create_parser()
         args = parser.parse_args()
-        print("Loading test data from '" + args.file_input + "'")
+        print("Loading test data from 'json/" + args.file_input + "'")
         all_df = pulling_amazon(args.file_input)
         print("Getting " + str(args.amount) + " random rows from data")
         if len(all_df.index) < args.amount:
