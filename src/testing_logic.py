@@ -109,10 +109,10 @@ def get_wordnet_pos(treebank_tag):
         return wn.NOUN  # Noun is probably the safest default tbh
 
 
+tokenizer = TweetTokenizer()
 
 def synonym_replacer(text, word_list):
     sentences = sent_tokenize(text)
-    tokenizer = TweetTokenizer()
     result = ""
     for sentence in sentences:
         result_words = []
