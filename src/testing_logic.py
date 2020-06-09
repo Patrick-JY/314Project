@@ -50,7 +50,7 @@ def remove_positive_words(text, positive_words):
 
 def prepare_data_mr2(df):
     positive_words = get_positive_words()
-    tqdm.pandas(desc="Mr2 Preparation", unit="rows")
+    tqdm.pandas(desc="Mr2 Preparation")
     df["ReviewTextPositiveRemoved"] = df["ReviewText"].progress_apply(lambda row: remove_positive_words(row, positive_words))
 
 def run_sentiment_mr2(df):
@@ -81,7 +81,7 @@ def prepare_data_mr3(df):
 
 def run_sentiment_mr3(df):
     prepare_data_mr3(df)
-    tqdm.pandas(desc="Mr3 Sentiment", unit="rows")
+    tqdm.pandas(desc="Mr3 Sentiment")
     df['Mr3'] = df["ReviewTextNegativeRemoved"].progress_apply(lambda row: performSentimentAnalysis(row))
     # Remove columns that are not needed anymore
     del df["ReviewTextNegativeRemoved"]
@@ -91,7 +91,7 @@ def replace_with_synonyms(data_frame):
     positive_words = get_positive_words()
     negative_words = get_negative_words()
     word_list = positive_words + negative_words
-    tqdm.pandas(desc="Mr4 Preparation", unit="rows")
+    tqdm.pandas(desc="Mr4 Preparation")
     data_frame['SynonymReplaced'] = data_frame['ReviewText'].progress_apply(lambda row: synonym_replacer(row, word_list))
 
 
@@ -125,19 +125,19 @@ def synonym_replacer(text, word_list):
 
             word_stripped_lower[0] = word[0].lower()
             if word[0] in word_list:
-                synonyms = []
+                synonym = ""
                 for syn in wn.synsets(word_stripped_lower[0], get_wordnet_pos(word_stripped_lower[1])):
                     for l in syn.lemmas():
-
                         # Skip words that are not in word_list as VaderSentiment can't evaluate these
                         # Skip words with _ as these can't be parsed either by VaderSentiment
                         # Skip words that are equal to the original word or are plurals etc. (Need to work on this to exclude all)
                         if l.name() not in word_list or l.name().lower() in word_stripped_lower[0] or "_" in l.name():
                             continue
-                        synonyms.append((l.name()))
-                if synonyms:
-                    # fix adding punctuation at end of word
-                    word[0] = random.choice(synonyms)
+                        synonym = l.name()
+                        break
+                    if synonym:
+                        word[0] = synonym
+                        break
             result_words.append(word[0])
         for i, w in enumerate(result_words):
             if i < len(result_words) - 1:
@@ -154,13 +154,13 @@ def synonym_replacer(text, word_list):
 
 def run_sentiment_mr4(df):
     replace_with_synonyms(df)
-    tqdm.pandas(desc="Mr4 Sentiment", unit="rows")
+    tqdm.pandas(desc="Mr4 Sentiment")
     df['Mr4'] = df["SynonymReplaced"].progress_apply(lambda row: performSentimentAnalysis(row))
     # Remove columns that are not needed anymore
     del df["SynonymReplaced"]
 
 def run_sentiment_mr0(df):
-    tqdm.pandas(desc="Mr0 Sentiment", unit="rows")
+    tqdm.pandas(desc="Mr0 Sentiment")
     df["Mr0"] = df["ReviewText"].progress_apply(lambda row: performSentimentAnalysis(row))
 
 def run_tests(df):
