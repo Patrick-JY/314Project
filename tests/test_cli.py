@@ -2,6 +2,7 @@ import argparse
 import pytest
 
 import src.pulling_cli as cli
+from pkg_resources import resource_filename
 
 
 class TestCli:
@@ -26,8 +27,8 @@ class TestCli:
 
     def test_inputfile3(self):
         parsed = self.parser.parse_args(['-i','10'])
-        assert parsed.file_input.endswith("json\Amazon_githubdata.json.gz")
-
+        assert parsed.file_input == resource_filename("vadertester", "json\Amazon_githubdata.json.gz")
+        
     def test_type(self):
         parsed = self.parser.parse_args(['-i','10'])
         assert type(parsed.amount) is int
