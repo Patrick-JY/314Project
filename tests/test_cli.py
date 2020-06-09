@@ -27,7 +27,7 @@ class TestCli:
 
     def test_inputfile3(self):
         parsed = self.parser.parse_args(['-i','10'])
-        assert parsed.file_input == resource_filename("vadertester", "json/Amazon_githubdata.json.gz")
+        assert parsed.file_input == resource_filename("vadertester", "json/reviews_Amazon_Instant_Video_5.json.gz")
 
     def test_type(self):
         parsed = self.parser.parse_args(['-i','10'])
