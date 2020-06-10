@@ -1,10 +1,10 @@
 import pytest
-import pandas as pd
 from src.pulling_logic import pulling_amazon
 import src.report_creation as report_creation
 import src.testing_logic as testing_logic
 import matplotlib.pyplot as plt
 from pkg_resources import resource_filename
+import os
 
 @pytest.fixture(scope="session")
 def tested_data_frame():
@@ -12,8 +12,8 @@ def tested_data_frame():
     testing_logic.run_tests(df)
     return df
 
-
-def test_report_generation(tested_data_frame, capsys):
+def test_report_generation(tmpdir, tested_data_frame, capsys):
+    os.chdir(tmpdir)
     report_creation.report_generation(tested_data_frame.copy())
     captured = capsys.readouterr()
     assert captured.out.startswith("Tests Running \n Test 1: Accuracy of the Un-Modified DataSet")
@@ -27,16 +27,20 @@ def test_report_generation(tested_data_frame, capsys):
     assert "Test 5: " in captured.out
     assert "Outputting Graphs:" in captured.out
     assert "Column Graph grouped by Word length" in captured.out
+    assert os.path.exists(os.path.join(tmpdir, "column_graph.png"))
+    assert os.path.exists(os.path.join(tmpdir, "summary_table.png"))
 
 
 
 
-def test_column_graph_word_length(tested_data_frame):
+def test_column_graph_word_length(tmpdir, tested_data_frame):
+    os.chdir(tmpdir)
     num_figs_before = plt.gcf().number
     df = tested_data_frame.copy()
     report_creation.column_graph_word_length(df)
     num_figs_after = plt.gcf().number
     assert num_figs_before <= num_figs_after
+    assert os.path.exists(os.path.join(tmpdir, "column_graph.png"))
 
 
 def test_prepare_word_length(tested_data_frame):
@@ -57,14 +61,15 @@ def test_prepare_word_length(tested_data_frame):
     assert 'cat4' in output_df
     assert 'cat5' in output_df
 
-
-def test_summary_table(tested_data_frame):
+def test_summary_table(tmpdir, tested_data_frame):
+    os.chdir(tmpdir)
     num_figs_before = plt.gcf().number
     df = tested_data_frame.copy()
     test_pass = [False, True, False, True, False]
     report_creation.summary_table(test_pass)
     num_figs_after = plt.gcf().number
     assert num_figs_before <= num_figs_after
+    assert os.path.exists(os.path.join(tmpdir, "summary_table.png"))
 
 
 
