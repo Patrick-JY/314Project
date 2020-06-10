@@ -1,9 +1,5 @@
-from pathlib import Path
 import vaderSentiment
 import os
-
-def join_base_path(path):
-    return path
 
 
 def load_vadersentiment_lexicon_data():

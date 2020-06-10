@@ -1,5 +1,4 @@
-from src.utils import join_base_path, load_vadersentiment_lexicon_data, get_positive_words, get_negative_words
-import os
+from src.utils import load_vadersentiment_lexicon_data, get_positive_words, get_negative_words
 
 def test_load_vadersentiment_lexicon_data():
     lexicon_data = load_vadersentiment_lexicon_data()

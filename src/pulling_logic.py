@@ -1,7 +1,6 @@
 # logic for the pulling of data
 import pandas as pd
 import gzip
-from src.utils import join_base_path
 import re
 import html
 import unicodedata
