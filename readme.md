@@ -9,13 +9,21 @@ NOTE: run this from the directory of the zip file
 ### To install from unzipped folder
 ```bash
 pip install . 
+```  
+### To run tests while installing in pip use command line option
+```bash
+--install-option=pytest
 ```
-NOTE: run this command from the unzipped folder
 ### If pip is not installed
 ```bash
 python setup.py install
 ```
-NOTE: run this command from the unzipped folder
+NOTE: run this from the directory of the unzipped file
+### To run tests while installing with setup.py use 
+```bash
+python setup.py install pytest
+```
+NOTE: run this from the directory of the unzipped file
 ### To run this program
 ```bash
 python -m vadertester 
