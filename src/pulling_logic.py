@@ -17,7 +17,7 @@ def amazon_parse(path):
 
     g = gzip.open(path, 'rb')
     for l in g:
-        yield json.loads(l), l
+        yield json.loads(l), len(l)
 
 
 def amazon_get_df(path):
@@ -25,7 +25,7 @@ def amazon_get_df(path):
 
     with tqdm(total= get_file_size(path),unit="bytes",unit_scale=True,unit_divisor=1024, desc="Loading data") as pbar:
         for d, l in amazon_parse(path):
-            pbar.update(len(l))
+            pbar.update(l)
             df.append(d)
     return pd.DataFrame.from_records(df)
 
