@@ -21,15 +21,13 @@ def amazon_parse(path):
 
 
 def amazon_get_df(path):
-    i = 0
-    df = {}
+    df = []
 
     with tqdm(total= get_file_size(path),unit="bytes",unit_scale=True,unit_divisor=1024, desc="Loading data") as pbar:
         for d, l in amazon_parse(path):
             pbar.update(len(l))
-            df[i] = d
-            i += 1
-    return pd.DataFrame.from_dict(df, orient='index')
+            df.append(d)
+    return pd.DataFrame.from_records(df)
 
 
 def pulling_amazon(dataset):
