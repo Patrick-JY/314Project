@@ -23,7 +23,7 @@ python -m vadertester
 #### command line options
 * -i AMOUNT or --input AMOUNT , where amount is the amount of rows to use for testing (default=1000)
 * -f FILENAME or --file FILENAME, were filename is the name of the json.gz file
-(default for -f is {vadertester_installed_dir}/vadertester/json/reviews_Amazon_Instant_Video_5.json.gz with 37127 rows of data))
+(default for -f is {VADERTESTER_INSTALLED_DIR}/vadertester/json/reviews_Amazon_Instant_Video_5.json.gz with 37127 rows of data))
 
 Data downloaded from [here](https://nijianmo.github.io/amazon/index.html#complete-data)
 
