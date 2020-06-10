@@ -18,10 +18,7 @@ def amazon_parse(path):
     g = gzip.open(path, 'rb')
     for l in g:
         data = json.loads(l)
-        keys_to_del = []
-        for k in data.keys():
-            if k not in ["reviewerID", "unixReviewTime", "reviewText", "overall"]:
-                keys_to_del.append(k)
+        keys_to_del = [k for k in data.keys() if k not in ["reviewerID", "unixReviewTime", "reviewText", "overall"]]
         for k in keys_to_del:
             del data[k]
         yield data, len(l)
@@ -34,7 +31,7 @@ def amazon_get_df(path):
         for d, l in amazon_parse(path):
             pbar.update(l)
             df.append(d)
-    return pd.DataFrame.from_records(df, columns=["reviewerID", "unixReviewTime", "reviewText", "overall"])
+    return pd.DataFrame.from_records(df)
 
 
 def pulling_amazon(dataset):
