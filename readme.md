@@ -15,10 +15,6 @@ NOTE: run this from the directory of the unzipped file
 ```bash
 pip install git+https://github.com/Patrick-JY/314Project.git
 ```  
-### To run tests while installing with pip use command line option
-```bash
---install-option=pytest
-```
 ### If pip is not installed
 ```bash
 python setup.py install
