@@ -20,11 +20,6 @@ pip install git+https://github.com/Patrick-JY/314Project.git
 python setup.py install
 ```
 NOTE: run this from the directory of the unzipped file
-### To run tests while installing with setup.py use 
-```bash
-python setup.py install pytest
-```
-NOTE: run this from the directory of the unzipped file
 ### To run this program
 ```bash
 python -m vadertester 
