@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from src.analyse_results import calculate_test1, calculate_test5, calculate_test4, calculate_test3, calculate_test2
 from tqdm import tqdm
 from tabulate import tabulate
+import sys
 
 def report_generation(df):
     print("Tests Running \n Test 1: Accuracy of the Un-Modified DataSet")
@@ -66,7 +67,8 @@ def report_generation(df):
 
     print("Outputting Summary: \n")
     summary_table(test_pass)
-    plt.show()
+    if not hasattr(sys, '_called_from_test'):
+        plt.show()
 
 def column_graph_word_length(df):
     graph_df = improved_calculation(df)
