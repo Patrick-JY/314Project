@@ -2,8 +2,8 @@ from src.pulling_cli import create_parser
 from src.pulling_logic import pulling_amazon, random_sample
 from src.testing_logic import run_tests
 from src.report_creation import report_generation
-from src.utils import join_base_path
-#https://stackoverflow.com/questions/550470/overload-print-python
+
+# modified from https://stackoverflow.com/questions/550470/overload-print-python
 class writer :
     def __init__(self, *writers) :
         self.writers = writers
