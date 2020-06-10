@@ -10,6 +10,11 @@ NOTE: run this from the directory of the zip file
 ```bash
 pip install . 
 ```  
+NOTE: run this from the directory of the zip file
+### To install from github source
+```bash
+pip install git+https://github.com/Patrick-JY/314Project.git
+```  
 ### To run tests while installing with pip use command line option
 ```bash
 --install-option=pytest
