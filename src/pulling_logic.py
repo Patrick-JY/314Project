@@ -17,7 +17,14 @@ def amazon_parse(path):
 
     g = gzip.open(path, 'rb')
     for l in g:
-        yield json.loads(l), len(l)
+        data = json.loads(l)
+        keys_to_del = []
+        for k in data.keys():
+            if k not in ["reviewerID", "unixReviewTime", "reviewText", "overall"]:
+                keys_to_del.append(k)
+        for k in keys_to_del:
+            del data[k]
+        yield data, len(l)
 
 
 def amazon_get_df(path):
@@ -27,7 +34,7 @@ def amazon_get_df(path):
         for d, l in amazon_parse(path):
             pbar.update(l)
             df.append(d)
-    return pd.DataFrame.from_records(df)
+    return pd.DataFrame.from_records(df, columns=["reviewerID", "unixReviewTime", "reviewText", "overall"])
 
 
 def pulling_amazon(dataset):
@@ -54,27 +61,27 @@ def random_sample(df, n):
 # code thanks to mark adler at
 # https://stackoverflow.com/questions/24332295/how-to-determine-the-content-length-of-a-gzipped-file-in-python
 def get_file_size(path):
-    f = open(path, "rb")
-    total = 0
-    buf = f.read(1024)
-    while True:  # loop through concatenated gzip streams
-        z = zlib.decompressobj(15 + 16)
-        while True:  # loop through one gzip stream
-            while True:  # go through all output from one input buffer
-                total += len(z.decompress(buf, 4096))
-                buf = z.unconsumed_tail
+    with open(path, "rb") as f:
+        total = 0
+        buf = f.read(1024)
+        while True:  # loop through concatenated gzip streams
+            z = zlib.decompressobj(15 + 16)
+            while True:  # loop through one gzip stream
+                while True:  # go through all output from one input buffer
+                    total += len(z.decompress(buf, 4096))
+                    buf = z.unconsumed_tail
+                    if buf == b"":
+                        break
+                if z.eof:
+                    break  # end of a gzip stream found
+                buf = f.read(1024)
+                if buf == b"":
+                    warnings.warn("incomplete gzip stream")
+                    break
+            buf = z.unused_data
+            z = None
+            if buf == b"":
+                buf = f.read(1024)
                 if buf == b"":
                     break
-            if z.eof:
-                break  # end of a gzip stream found
-            buf = f.read(1024)
-            if buf == b"":
-                warnings.warn("incomplete gzip stream")
-                break
-        buf = z.unused_data
-        z = None
-        if buf == b"":
-            buf = f.read(1024)
-            if buf == b"":
-                break
-    return total
+        return total
