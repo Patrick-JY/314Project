@@ -82,4 +82,6 @@ The default version of the VADER Sentiment tested is 3.3.2
 ```bash
 pip install vaderSentiment==VERSION_NO 
 where VERSION_NO is the version of vaderSentiment to install
+or to install latest version
+pip install vaderSentiment --upgrade
 ```
